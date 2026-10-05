@@ -13,9 +13,16 @@
       --blue: #2563EB;
       --blue-2: #1D4ED8;
       --text: #0F172A;
-      --muted: #475569;
-      --line: rgba(15, 23, 42, 0.1);
-      --chip: rgba(37, 99, 235, 0.08);
+      --muted: #334155;
+      --line: rgba(15, 23, 42, 0.14);
+      --chip: rgba(37, 99, 235, 0.1);
+      --accent: #1D4ED8;
+      --on-accent: #1E3A8A;
+      --pill: #0F172A;
+      --tag: #1E293B;
+      --wip: #5B21B6;
+      --link-bg: rgba(37, 99, 235, 0.12);
+      --link-text: #1E3A8A;
       --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
       --glow: 0 0 0 rgba(37, 99, 235, 0);
       --soft: rgba(15, 23, 42, 0.03);
@@ -33,6 +40,13 @@
       --shadow: 0 24px 60px rgba(2, 6, 23, 0.45);
       --glow: 0 0 40px rgba(59, 130, 246, 0.12);
       --soft: rgba(11, 16, 38, 0.45);
+      --accent: #DBEAFE;
+      --on-accent: #DBEAFE;
+      --pill: #E2E8F0;
+      --tag: #E2E8F0;
+      --wip: #E9D5FF;
+      --link-bg: rgba(59, 130, 246, 0.16);
+      --link-text: #FFFFFF;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -140,7 +154,7 @@
       place-items: center;
       text-align: center;
       padding: 12px;
-      color: #dbeafe;
+      color: var(--on-accent);
       font-size: 0.82rem;
     }
     .status {
@@ -150,7 +164,7 @@
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.04em;
-      color: #dbeafe;
+      color: var(--on-accent);
       background: rgba(59, 130, 246, 0.12);
       border: 1px solid rgba(59, 130, 246, 0.28);
       border-radius: 999px;
@@ -165,7 +179,7 @@
       box-shadow: 0 0 8px #34d399;
     }
     h1 { font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -0.03em; line-height: 1.1; }
-    .role { color: #dbeafe; font-weight: 650; margin-top: 6px; }
+    .role { color: var(--on-accent); font-weight: 650; margin-top: 6px; }
     .meta { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
     .intro { color: var(--muted); margin-top: 12px; max-width: 68ch; }
 
@@ -173,8 +187,8 @@
     .pill, .chip {
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      color: #e2e8f0;
+      background: var(--soft);
+      color: var(--pill);
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.03em;
@@ -229,17 +243,17 @@
       place-items: center;
       text-align: center;
       padding: 12px;
-      color: #dbeafe;
+      color: var(--on-accent);
       font-size: 0.82rem;
     }
     .shot.club { background: linear-gradient(145deg, #111827, #ca8a04 150%); }
     .shot.z { background: linear-gradient(145deg, #4c1d95, #1e1b4b); }
     .body { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-    .kicker { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: #93c5fd; }
+    .kicker { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
     .project h2 { font-size: 1.02rem; }
     .project p { color: var(--muted); font-size: 0.86rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag { font-size: 0.7rem; color: #e2e8f0; border: 1px solid var(--line); border-radius: 999px; padding: 3px 7px; }
+    .tag { font-size: 0.7rem; color: var(--tag); border: 1px solid var(--line); border-radius: 999px; padding: 3px 7px; }
     .link {
       margin-top: auto;
       display: inline-flex;
@@ -249,8 +263,8 @@
       padding: 0 12px;
       border-radius: 999px;
       border: 1px solid rgba(59, 130, 246, 0.35);
-      background: rgba(59, 130, 246, 0.14);
-      color: white;
+      background: var(--link-bg);
+      color: var(--link-text);
       font-size: 0.78rem;
       font-weight: 800;
       width: fit-content;
@@ -267,7 +281,7 @@
       font-size: 0.68rem;
       font-weight: 800;
       letter-spacing: 0.04em;
-      color: #e9d5ff;
+      color: var(--wip);
       background: rgba(139, 92, 246, 0.18);
       border: 1px solid rgba(196, 181, 253, 0.35);
       border-radius: 999px;
@@ -320,6 +334,7 @@
     .connect a.primary {
       background: linear-gradient(135deg, #60a5fa, #2563eb);
       border-color: transparent;
+      color: #ffffff;
     }
     .connect a:hover, .connect button:hover { transform: translateY(-2px); }
     .note { color: var(--muted); font-size: 0.82rem; margin-top: 8px; }
