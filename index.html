@@ -3,418 +3,489 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kaito — Aspiring Web Developer and ICT student from Olongapo City. Portfolio of frontend projects, responsive websites, and web applications.">
+  <meta name="description" content="Kaito — aspiring web developer and ICT student from Olongapo City. Portfolio of responsive websites and web applications.">
   <title>Kaito | Aspiring Web Developer</title>
   <style>
     :root {
       --bg: #0B1026;
-      --bg-soft: #111833;
-      --primary: #3B82F6;
-      --primary-deep: #1D4ED8;
+      --bg-2: #111A35;
+      --blue: #3B82F6;
+      --blue-2: #60A5FA;
       --text: #F8FAFC;
       --muted: #94A3B8;
-      --line: rgba(148, 163, 184, 0.18);
-      --glass: rgba(15, 23, 52, 0.72);
-      --radius: 18px;
-      --shadow: 0 18px 50px rgba(2, 6, 23, 0.45);
-      --nav-h: 76px;
+      --line: rgba(148, 163, 184, 0.16);
+      --glass: rgba(17, 26, 53, 0.72);
+      --radius: 20px;
+      --nav: 74px;
+      --shadow: 0 20px 50px rgba(2, 6, 23, 0.38);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       background:
-        radial-gradient(900px 500px at 10% -10%, rgba(59, 130, 246, 0.22), transparent 60%),
-        radial-gradient(700px 420px at 100% 8%, rgba(99, 102, 241, 0.16), transparent 55%),
+        radial-gradient(880px 480px at 8% -8%, rgba(59, 130, 246, 0.18), transparent 62%),
+        radial-gradient(640px 380px at 100% 0%, rgba(99, 102, 241, 0.12), transparent 58%),
         var(--bg);
       color: var(--text);
       line-height: 1.65;
-      min-height: 100vh;
     }
-
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
-    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
 
-    .wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -40px;
+      background: var(--blue);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      z-index: 80;
     }
+    .skip:focus { top: 12px; }
 
-    /* Navigation */
+    .wrap { width: min(1140px, calc(100% - 36px)); margin: 0 auto; }
+
     .nav {
       position: sticky;
       top: 0;
-      z-index: 40;
-      height: var(--nav-h);
+      z-index: 50;
+      height: var(--nav);
       display: flex;
       align-items: center;
-      backdrop-filter: blur(16px);
-      background: rgba(11, 16, 38, 0.78);
-      border-bottom: 1px solid var(--line);
+      background: rgba(11, 16, 38, 0.72);
+      border-bottom: 1px solid transparent;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
-
+    .nav.scrolled {
+      background: rgba(11, 16, 38, 0.86);
+      backdrop-filter: blur(16px);
+      border-bottom-color: var(--line);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+    }
     .nav-inner {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1140px, calc(100% - 36px));
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
     }
-
     .logo {
       font-weight: 800;
-      letter-spacing: 0.16em;
-      font-size: 1.05rem;
-      color: var(--text);
+      letter-spacing: 0.18em;
+      font-size: 1.02rem;
     }
-
-    .logo span { color: var(--primary); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      list-style: none;
-    }
-
+    .logo span { color: var(--blue-2); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
     .nav-links a {
+      position: relative;
       color: var(--muted);
-      font-size: 0.95rem;
-      padding: 8px 12px;
+      padding: 10px 14px;
       border-radius: 999px;
-      transition: color 0.2s ease, background 0.2s ease;
+      font-size: 0.95rem;
     }
-
     .nav-links a:hover,
-    .nav-links a:focus-visible,
-    .nav-links a.active {
-      color: var(--text);
-      background: rgba(59, 130, 246, 0.14);
+    .nav-links a:focus-visible { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 4px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--blue);
+      box-shadow: 0 0 10px var(--blue);
     }
-
     .menu-btn {
       display: none;
       width: 46px;
       height: 46px;
       border-radius: 12px;
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text);
       cursor: pointer;
     }
-
     .menu-btn span,
     .menu-btn span::before,
     .menu-btn span::after {
       display: block;
       width: 18px;
       height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      position: relative;
       margin: 0 auto;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      background: var(--text);
+      position: relative;
+      border-radius: 2px;
     }
-
     .menu-btn span::before,
-    .menu-btn span::after {
-      content: "";
-      position: absolute;
-      left: 0;
-    }
-
+    .menu-btn span::after { content: ""; position: absolute; left: 0; }
     .menu-btn span::before { top: -6px; }
     .menu-btn span::after { top: 6px; }
-
     .menu-btn[aria-expanded="true"] span { background: transparent; }
     .menu-btn[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
     .menu-btn[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
 
-    /* Hero */
     .hero {
-      padding: 72px 0 40px;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 48px;
       align-items: center;
+      padding: 64px 0 36px;
     }
-
-    .eyebrow {
+    .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: var(--primary);
-      font-size: 0.86rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      color: #dbeafe;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.84rem;
       font-weight: 700;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
-
-    .dot {
+    .pulse {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 12px var(--primary);
+      background: #34d399;
+      box-shadow: 0 0 10px #34d399;
     }
-
     h1 {
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
+      font-size: clamp(2.5rem, 5vw, 4.3rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin-bottom: 14px;
     }
-
-    .subtitle {
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      color: #dbe7ff;
+    .headline {
+      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+      font-weight: 650;
+      color: #e2e8f0;
       margin-bottom: 16px;
-      font-weight: 600;
+      max-width: 16ch;
     }
-
-    .lead {
-      color: var(--muted);
-      max-width: 560px;
-      font-size: 1.05rem;
-      margin-bottom: 28px;
-    }
-
+    .lead { color: var(--muted); max-width: 58ch; margin-bottom: 26px; font-size: 1.05rem; }
     .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       min-height: 48px;
       padding: 0 18px;
       border-radius: 999px;
       border: 1px solid transparent;
       font-weight: 700;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
-
     .btn:hover { transform: translateY(-2px); }
-    .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
-
+    .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
     .btn-primary {
-      background: linear-gradient(135deg, #60a5fa, var(--primary-deep));
       color: white;
-      box-shadow: 0 10px 28px rgba(59, 130, 246, 0.35);
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.32);
     }
-
     .btn-ghost {
+      color: var(--text);
       background: rgba(255, 255, 255, 0.04);
       border-color: var(--line);
-      color: var(--text);
+    }
+    .btn[disabled], .btn.is-static {
+      cursor: default;
+      opacity: 0.9;
+      transform: none;
     }
 
-    .terminal {
-      background: rgba(8, 12, 30, 0.85);
-      border: 1px solid rgba(59, 130, 246, 0.28);
-      border-radius: 22px;
-      box-shadow: var(--shadow), 0 0 40px rgba(59, 130, 246, 0.12);
+    .portrait-wrap { position: relative; justify-self: center; width: min(360px, 100%); }
+    .portrait-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -18px -22px auto auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 36px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.45), transparent 70%);
+      z-index: 0;
+    }
+    .portrait {
+      position: relative;
+      z-index: 1;
+      aspect-ratio: 4 / 5;
+      border-radius: 28px;
       overflow: hidden;
+      border: 1px solid rgba(96, 165, 250, 0.45);
+      box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.08), 0 0 40px rgba(59, 130, 246, 0.22), var(--shadow);
+      background:
+        linear-gradient(160deg, rgba(59, 130, 246, 0.25), rgba(17, 26, 53, 0.9)),
+        var(--bg-2);
     }
-
-    .terminal-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.03);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .traffic { width: 10px; height: 10px; border-radius: 50%; }
-    .red { background: #fb7185; }
-    .yellow { background: #fbbf24; }
-    .green { background: #34d399; }
-
-    .terminal-title {
-      margin-left: 8px;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .terminal pre {
-      padding: 22px 20px 26px;
-      font-family: "Cascadia Code", "Consolas", monospace;
-      font-size: 0.92rem;
-      line-height: 1.7;
-      color: #dbeafe;
-      white-space: pre-wrap;
-    }
-
-    .c-key { color: #93c5fd; }
-    .c-str { color: #86efac; }
-    .c-com { color: #64748b; }
-    .c-fn { color: #f9a8d4; }
-
-    section { padding: 72px 0; }
-
-    .section-head { margin-bottom: 28px; max-width: 680px; }
-
-    h2 {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-    }
-
-    .section-head p { color: var(--muted); }
-
-    .about-grid,
-    .contact-grid {
+    .portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .portrait.missing img { display: none; }
+    .portrait.missing::after {
+      content: "Add your photo at assets/profile.jpg";
+      position: absolute;
+      inset: 0;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 22px;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      color: #dbeafe;
+    }
+    .loc {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      background: rgba(11, 16, 38, 0.78);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      backdrop-filter: blur(8px);
     }
 
-    .card, .skill, .project, .learn-item, .panel {
+    section { padding: 78px 0; }
+    .section-head { max-width: 680px; margin-bottom: 28px; }
+    h2 { font-size: clamp(1.8rem, 3vw, 2.45rem); letter-spacing: -0.03em; margin-bottom: 8px; }
+    .section-head p, .muted { color: var(--muted); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .mini-photo {
+      width: 180px;
+      aspect-ratio: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      background: linear-gradient(160deg, rgba(59, 130, 246, 0.28), var(--bg-2));
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+    .mini-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .mini-photo.missing img { display: none; }
+    .mini-photo.missing::after {
+      content: "profile.jpg";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #dbeafe;
+      font-size: 0.9rem;
+    }
+    .about-copy {
       background: var(--glass);
       border: 1px solid var(--line);
       border-radius: var(--radius);
+      padding: 26px;
       backdrop-filter: blur(10px);
     }
-
-    .card, .panel { padding: 26px; box-shadow: var(--shadow); }
-
-    .card p + p { margin-top: 12px; color: var(--muted); }
-    .card p { color: #e2e8f0; }
-
-    .facts { display: grid; gap: 12px; }
-    .fact {
-      padding: 16px 18px;
-      border-radius: 14px;
+    .about-copy p + p { margin-top: 12px; color: var(--muted); }
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .info {
       background: rgba(59, 130, 246, 0.08);
       border: 1px solid rgba(59, 130, 246, 0.18);
+      border-radius: 16px;
+      padding: 14px;
     }
-    .fact strong { display: block; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
-    .fact span { color: var(--text); }
+    .info strong { display: block; margin-bottom: 4px; }
+    .info span { color: var(--muted); font-size: 0.9rem; }
 
     .skills {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
     }
-
+    .skill, .card, .journey-item, .contact-panel {
+      background: rgba(17, 26, 53, 0.84);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
     .skill {
       padding: 18px;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-
     .skill:hover {
       transform: translateY(-4px);
-      border-color: rgba(59, 130, 246, 0.45);
-      box-shadow: 0 0 24px rgba(59, 130, 246, 0.16);
+      border-color: rgba(59, 130, 246, 0.42);
+      box-shadow: 0 0 22px rgba(59, 130, 246, 0.14);
     }
-
-    .skill h3 { font-size: 1.05rem; margin: 10px 0 6px; }
-    .skill p { color: var(--muted); font-size: 0.92rem; }
-    .badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      color: #bfdbfe;
-      background: rgba(59, 130, 246, 0.16);
-      border-radius: 999px;
-      padding: 4px 8px;
-    }
-
-    .projects {
+    .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      place-items: center;
+      background: rgba(59, 130, 246, 0.14);
+      color: #bfdbfe;
+      font-weight: 800;
+      margin-bottom: 12px;
     }
+    .skill h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .skill p { color: var(--muted); font-size: 0.92rem; }
 
+    .projects { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
     .project {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 24px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
     }
-
     .project:hover {
       transform: translateY(-6px);
       border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.35);
     }
-
-    .art {
-      height: 148px;
+    .project.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.25fr 0.9fr; }
+    .shot {
+      min-height: 240px;
       position: relative;
+      background: linear-gradient(145deg, #1e3a8a, #0b1026 70%);
+    }
+    .project.wide .shot { min-height: 320px; }
+    .shot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .shot.missing img { display: none; }
+    .shot.missing::after {
+      content: attr(data-fallback);
+      position: absolute;
+      inset: 0;
       display: grid;
       place-items: center;
+      padding: 24px;
+      text-align: center;
+      color: #dbeafe;
     }
-
-    .art-1 { background: linear-gradient(145deg, #1e3a8a, #0f172a 70%); }
-    .art-2 { background: linear-gradient(145deg, #0e7490, #0b1026 72%); }
-    .art-3 { background: linear-gradient(145deg, #6d28d9, #1e1b4b 70%); }
-
-    .glyph {
-      width: 74px;
-      height: 74px;
-      border-radius: 20px;
-      display: grid;
-      place-items: center;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 0 28px rgba(255, 255, 255, 0.08);
-      font-size: 1.7rem;
+    .shot.club { background: linear-gradient(145deg, #111827, #facc15 140%); }
+    .shot.club::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 8px;
+      background: linear-gradient(90deg, #facc15, #111827);
+      z-index: 1;
     }
-
-    .project-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
-    .category { color: #93c5fd; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-    .project h3 { font-size: 1.25rem; }
-    .project p { color: var(--muted); flex: 1; }
-
+    .shot.zimelia { background: linear-gradient(145deg, #4c1d95, #1e1b4b 68%); }
+    .project-body { padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+    .kicker {
+      color: #93c5fd;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .project h3 { font-size: 1.4rem; }
+    .project p { color: var(--muted); }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag {
       font-size: 0.78rem;
-      color: #e2e8f0;
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 4px 9px;
+      color: #e2e8f0;
     }
-
-    .project-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
     .mini {
       font-size: 0.88rem;
       font-weight: 700;
       color: white;
-      background: rgba(59, 130, 246, 0.18);
-      border: 1px solid rgba(59, 130, 246, 0.35);
+      background: rgba(59, 130, 246, 0.16);
+      border: 1px solid rgba(59, 130, 246, 0.34);
       border-radius: 999px;
       padding: 8px 12px;
     }
-
-    .mini:hover { background: rgba(59, 130, 246, 0.32); }
-
-    .learning {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+    .mini:hover { background: rgba(59, 130, 246, 0.3); }
+    .wip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: #e9d5ff;
+      background: rgba(139, 92, 246, 0.18);
+      border: 1px solid rgba(196, 181, 253, 0.35);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
     }
+    .bar {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .bar span {
+      display: block;
+      width: 38%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #8b5cf6, #c4b5fd);
+      animation: slide 1.8s ease-in-out infinite;
+    }
+    @keyframes slide {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(280%); }
+    }
+    .project.zimelia { border-color: rgba(139, 92, 246, 0.35); }
+    .project.club { box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.08); }
 
-    .learn-item { padding: 18px; }
-    .learn-item strong { display: block; margin-bottom: 6px; }
-    .learn-item span { color: var(--muted); font-size: 0.92rem; }
+    .journey {
+      display: grid;
+      gap: 0;
+      border-left: 2px solid rgba(59, 130, 246, 0.35);
+      margin-left: 10px;
+    }
+    .journey-item {
+      margin: 0 0 14px 22px;
+      padding: 18px 18px 18px 20px;
+      position: relative;
+    }
+    .journey-item::before {
+      content: "";
+      position: absolute;
+      left: -29px;
+      top: 22px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+    }
+    .journey-item strong { display: block; margin-bottom: 4px; }
+    .journey-item span { color: var(--muted); }
 
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+    .contact-panel { padding: 26px; }
     .contact-actions { display: flex; flex-direction: column; gap: 10px; }
-    .note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
+    .hint { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
 
     footer {
       border-top: 1px solid var(--line);
-      padding: 28px 0 90px;
-      color: var(--muted);
+      padding: 28px 0 96px;
       text-align: center;
+      color: var(--muted);
     }
-
     .top-btn {
       position: fixed;
       right: 18px;
@@ -426,76 +497,56 @@
       background: #122047;
       color: white;
       cursor: pointer;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: var(--shadow);
     }
-
     .top-btn.show { opacity: 1; pointer-events: auto; }
-    .top-btn:hover { transform: translateY(-2px); }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      animation: rise 0.7s ease forwards;
-    }
-
-    .delay-1 { animation-delay: 0.12s; }
-    .delay-2 { animation-delay: 0.24s; }
-
-    .scroll-reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal { opacity: 0; transform: translateY(16px); animation: rise 0.7s ease forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .scroll-reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .scroll-reveal.visible { opacity: 1; transform: none; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
 
-    @keyframes rise {
-      to { opacity: 1; transform: none; }
-    }
-
-    @media (max-width: 900px) {
-      .hero, .about-grid, .contact-grid, .projects, .skills, .learning {
-        grid-template-columns: 1fr 1fr;
-      }
-      .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    @media (max-width: 980px) {
+      .hero, .about-grid, .projects, .project.wide, .contact-grid, .skills { grid-template-columns: 1fr 1fr; }
+      .hero, .about-grid, .contact-grid, .project.wide { grid-template-columns: 1fr; }
       .projects { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 720px) {
       .menu-btn { display: grid; place-items: center; }
       .nav-links {
+        display: none;
         position: absolute;
-        top: var(--nav-h);
+        top: var(--nav);
         left: 0;
         right: 0;
-        display: none;
         flex-direction: column;
-        align-items: stretch;
-        padding: 12px;
+        padding: 10px 16px 16px;
         background: rgba(11, 16, 38, 0.96);
         border-bottom: 1px solid var(--line);
       }
       .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px; }
-      .skills, .learning { grid-template-columns: 1fr; }
-      section { padding: 56px 0; }
+      .skills, .info-cards { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .mini-photo { width: 140px; }
+      section { padding: 58px 0; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal, .scroll-reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
-  <header class="nav">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav" id="nav">
     <div class="nav-inner">
       <a class="logo" href="#home">KAITO<span>.</span></a>
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
-        <span></span>
-      </button>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu"><span></span></button>
       <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -506,33 +557,23 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero wrap" id="home">
       <div>
-        <p class="eyebrow reveal"><span class="dot"></span> Olongapo City, Philippines</p>
-        <h1 class="reveal delay-1">Hi, I'm Kaito.</h1>
-        <p class="subtitle reveal delay-1">Aspiring Web Developer & ICT Student</p>
-        <p class="lead reveal delay-2">I build creative, functional, and responsive web experiences — from clean interfaces to practical school and community projects I can keep improving.</p>
-        <div class="actions reveal delay-2">
-          <a class="btn btn-primary" href="#projects">View My Projects</a>
+        <p class="badge reveal"><span class="pulse"></span> Open to Learning & Opportunities</p>
+        <h1 class="reveal d1">Hi, I'm Kaito.</h1>
+        <p class="headline reveal d1">Building Digital Experiences Through Code.</p>
+        <p class="lead reveal d2">I'm an aspiring web developer and ICT student passionate about creating modern, responsive, and functional websites. I enjoy turning ideas into interactive digital experiences while continuously improving my skills.</p>
+        <div class="actions reveal d2">
+          <a class="btn btn-primary" href="#projects">Explore My Projects</a>
           <a class="btn btn-ghost" href="#contact">Contact Me</a>
         </div>
       </div>
-      <div class="terminal reveal delay-2" aria-hidden="true">
-        <div class="terminal-bar">
-          <span class="traffic red"></span>
-          <span class="traffic yellow"></span>
-          <span class="traffic green"></span>
-          <span class="terminal-title">kaito.dev — portfolio.js</span>
+      <div class="portrait-wrap reveal d2">
+        <div class="portrait" id="heroPhoto">
+          <img src="assets/profile.jpg" alt="Portrait of Kaito, an ICT student and aspiring web developer from Olongapo City" onerror="this.parentElement.classList.add('missing')">
         </div>
-        <pre><span class="c-com">// currently building</span>
-<span class="c-key">const</span> kaito = {
-  role: <span class="c-str">"ICT student"</span>,
-  focus: [<span class="c-str">"frontend"</span>, <span class="c-str">"UI"</span>, <span class="c-str">"apps"</span>],
-  goal: <span class="c-str">"ship useful websites"</span>
-};
-
-<span class="c-fn">learn</span>(<span class="c-str">"JavaScript + databases"</span>);</pre>
+        <p class="loc">Olongapo City, Philippines</p>
       </div>
     </section>
 
@@ -540,19 +581,23 @@
       <div class="wrap">
         <div class="section-head scroll-reveal">
           <h2>About Me</h2>
-          <p>A student portfolio focused on learning by building.</p>
+          <p>A student learning web development by building real projects.</p>
         </div>
         <div class="about-grid">
-          <article class="card scroll-reveal">
-            <p>I'm Kaito, an ICT student in Olongapo City learning web development by making real projects. I enjoy turning simple ideas into pages people can actually use — menus, club sites, and small web apps.</p>
-            <p>Right now I'm focused on frontend development, website design, and web applications. I'm also starting to connect interfaces with databases so projects can store orders, registrations, and other real data.</p>
-            <p>I like learning new technologies one project at a time, keeping the work humble, clear, and useful for school and local communities.</p>
-          </article>
-          <aside class="facts scroll-reveal">
-            <div class="fact"><strong>Location</strong><span>Olongapo City, Philippines</span></div>
-            <div class="fact"><strong>Focus</strong><span>Frontend, responsive sites, UI design</span></div>
-            <div class="fact"><strong>Also exploring</strong><span>Database integration and web apps</span></div>
-          </aside>
+          <div class="mini-photo scroll-reveal">
+            <img src="assets/profile.jpg" alt="Small portrait of Kaito" onerror="this.parentElement.classList.add('missing')">
+          </div>
+          <div class="scroll-reveal">
+            <article class="about-copy">
+              <p>I'm Kaito, an ICT student from Olongapo City who enjoys building websites and exploring the world of web development. My journey involves learning through real projects, experimenting with new technologies, and continuously improving my coding skills.</p>
+              <p>I am especially interested in frontend development, responsive web design, website UI, web applications, and database integration. I am still learning, and I treat each project as practice rather than finished professional work.</p>
+            </article>
+            <div class="info-cards">
+              <article class="info"><strong>ICT Student</strong><span>Studying in Olongapo City and learning by doing.</span></article>
+              <article class="info"><strong>Aspiring Web Developer</strong><span>Practicing frontend, UI, and small web applications.</span></article>
+              <article class="info"><strong>Project-Based Learner</strong><span>Improving through school and personal builds.</span></article>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -560,18 +605,18 @@
     <section id="skills">
       <div class="wrap">
         <div class="section-head scroll-reveal">
-          <h2>Skills</h2>
-          <p>Technologies and tools I am learning or working with — not expert-level claims.</p>
+          <h2>Technical Skills</h2>
+          <p>Tools I am learning or using in projects. These are not expert ratings.</p>
         </div>
         <div class="skills">
-          <article class="skill scroll-reveal"><span class="badge">Learning</span><h3>HTML5</h3><p>Semantic structure for clear, accessible pages.</p></article>
-          <article class="skill scroll-reveal"><span class="badge">Learning</span><h3>CSS3</h3><p>Layouts, responsive design, and visual polish.</p></article>
-          <article class="skill scroll-reveal"><span class="badge">Practicing</span><h3>JavaScript</h3><p>Interactions, menus, and small app features.</p></article>
-          <article class="skill scroll-reveal"><span class="badge">Practicing</span><h3>Responsive Web Design</h3><p>Layouts that work on phone, tablet, and desktop.</p></article>
-          <article class="skill scroll-reveal"><span class="badge">Using</span><h3>Git and GitHub</h3><p>Saving progress and sharing project source code.</p></article>
-          <article class="skill scroll-reveal"><span class="badge">Exploring</span><h3>Supabase</h3><p>Simple database features for web applications.</p></article>
-          <article class="skill scroll-reveal"><span class="badge">Exploring</span><h3>Firebase</h3><p>Trying hosted data and app services.</p></article>
-          <article class="skill scroll-reveal"><span class="badge">Using</span><h3>Netlify</h3><p>Publishing static sites with a live link.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">H</div><h3>HTML5</h3><p>Semantic page structure and accessible content.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">C</div><h3>CSS3</h3><p>Layouts, responsive styling, and visual details.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">JS</div><h3>JavaScript</h3><p>Menus, interactions, and small app behavior.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">R</div><h3>Responsive Web Design</h3><p>Pages that adapt to phone, tablet, and desktop.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">G</div><h3>Git & GitHub</h3><p>Saving versions and sharing source code.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">S</div><h3>Supabase</h3><p>Trying database features inside web apps.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">F</div><h3>Firebase</h3><p>Exploring hosted data and app services.</p></article>
+          <article class="skill scroll-reveal"><div class="mark">N</div><h3>Netlify</h3><p>Publishing static sites with a live link.</p></article>
         </div>
       </div>
     </section>
@@ -580,45 +625,62 @@
       <div class="wrap">
         <div class="section-head scroll-reveal">
           <h2>Featured Projects</h2>
-          <p>School and concept builds. Replace the placeholder links with your real URLs.</p>
+          <p>School and personal builds. Replace placeholder links only where a real URL exists.</p>
         </div>
         <div class="projects">
-          <article class="project scroll-reveal">
-            <div class="art art-1"><div class="glyph" aria-hidden="true">🍜</div></div>
+          <article class="project wide scroll-reveal">
+            <div class="shot" data-fallback="Add screenshot: assets/projects/tambayan-cawag.jpg">
+              <img src="assets/projects/tambayan-cawag.jpg" alt="Preview of the Tambayan Cawag restaurant web application" onerror="this.parentElement.classList.add('missing')">
+            </div>
             <div class="project-body">
-              <p class="category">Restaurant Web Application</p>
+              <p class="kicker">Restaurant Web Application</p>
               <h3>Tambayan Cawag</h3>
-              <p>A restaurant website featuring a digital menu, customer ordering, dine-in reservations, and an admin dashboard.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Supabase</span></div>
+              <p>A restaurant web application designed to provide customers with a convenient digital menu, food ordering, dine-in reservations, and an administrative management interface.</p>
+              <div class="tags">
+                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Supabase</span>
+              </div>
               <div class="project-links">
-                <a class="mini" href="https://example.com/tambayan-cawag" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                <a class="mini" href="https://github.com/your-username/tambayan-cawag" target="_blank" rel="noopener noreferrer">Source Code</a>
+                <!-- Replace data-url with your live website -->
+                <a class="mini" href="#" data-url="INSERT_TAMBAYAN_CAWAG_WEBSITE_URL">Live Demo</a>
+                <!-- Replace data-url with your repository -->
+                <a class="mini" href="#" data-url="INSERT_TAMBAYAN_CAWAG_GITHUB_URL">Source Code</a>
               </div>
             </div>
           </article>
-          <article class="project scroll-reveal">
-            <div class="art art-2"><div class="glyph" aria-hidden="true">🎬</div></div>
+
+          <article class="project club scroll-reveal">
+            <div class="shot club" data-fallback="Add screenshot: assets/projects/multimedia-club.jpg">
+              <img src="assets/projects/multimedia-club.jpg" alt="Preview of the Multimedia Club school organization website" onerror="this.parentElement.classList.add('missing')">
+            </div>
             <div class="project-body">
-              <p class="category">School Organization Website</p>
+              <p class="kicker">School Organization Website</p>
               <h3>Multimedia Club</h3>
-              <p>A modern website for a school multimedia club, designed to provide information, promote activities, and support student registration.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span></div>
+              <p>A modern website for a school multimedia club, created to introduce the organization, showcase its purpose, and provide students with access to club information and registration.</p>
+              <div class="tags">
+                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span>
+              </div>
               <div class="project-links">
                 <a class="mini" href="https://multimedia-club.netlify.app" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                <a class="mini" href="https://github.com/your-username/multimedia-club" target="_blank" rel="noopener noreferrer">Source Code</a>
+                <a class="mini" href="#" data-url="INSERT_MULTIMEDIA_CLUB_GITHUB_URL">Source Code</a>
               </div>
             </div>
           </article>
-          <article class="project scroll-reveal">
-            <div class="art art-3"><div class="glyph" aria-hidden="true">✦</div></div>
+
+          <article class="project zimelia scroll-reveal">
+            <div class="shot zimelia" data-fallback="Add screenshot: assets/projects/zimelia.jpg">
+              <img src="assets/projects/zimelia.jpg" alt="Concept preview of Zimelia, an AI assistant project still in development" onerror="this.parentElement.classList.add('missing')">
+            </div>
             <div class="project-body">
-              <p class="category">AI Assistant Concept</p>
+              <p class="wip">WORK IN PROGRESS</p>
+              <p class="kicker">AI Assistant Concept</p>
               <h3>Zimelia</h3>
-              <p>A purple-themed AI assistant website concept featuring a character-based interface, interactive expressions, and a friendly user experience.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+              <p>Zimelia is an ongoing personal project exploring the concept of a friendly AI assistant with a character-based interface, interactive expressions, and a personalized user experience. The project is currently under development.</p>
+              <div class="bar" aria-hidden="true"><span></span></div>
+              <div class="tags">
+                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+              </div>
               <div class="project-links">
-                <a class="mini" href="https://example.com/zimelia" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                <a class="mini" href="https://github.com/your-username/zimelia" target="_blank" rel="noopener noreferrer">Source Code</a>
+                <button class="mini btn is-static" type="button" disabled>Currently in Development</button>
               </div>
             </div>
           </article>
@@ -626,17 +688,18 @@
       </div>
     </section>
 
-    <section id="learning">
+    <section id="journey">
       <div class="wrap">
         <div class="section-head scroll-reveal">
           <h2>Currently Learning</h2>
-          <p>Where the next practice hours are going.</p>
+          <p>A student growth path, not a work history.</p>
         </div>
-        <div class="learning">
-          <article class="learn-item scroll-reveal"><strong>Improving JavaScript</strong><span>Functions, DOM updates, and cleaner project code.</span></article>
-          <article class="learn-item scroll-reveal"><strong>Backend integration</strong><span>Connecting forms and dashboards to real data.</span></article>
-          <article class="learn-item scroll-reveal"><strong>Responsive websites</strong><span>Better spacing and navigation on small screens.</span></article>
-          <article class="learn-item scroll-reveal"><strong>Databases and APIs</strong><span>Understanding how apps read and save information.</span></article>
+        <div class="journey">
+          <article class="journey-item scroll-reveal"><strong>Improving JavaScript fundamentals</strong><span>Practicing functions, the DOM, and clearer project code.</span></article>
+          <article class="journey-item scroll-reveal"><strong>Learning backend integration</strong><span>Connecting forms and simple dashboards to stored data.</span></article>
+          <article class="journey-item scroll-reveal"><strong>Understanding APIs and databases</strong><span>Learning how apps read, save, and update information.</span></article>
+          <article class="journey-item scroll-reveal"><strong>Developing better responsive layouts</strong><span>Improving spacing, navigation, and small-screen usability.</span></article>
+          <article class="journey-item scroll-reveal"><strong>Building more functional web applications</strong><span>Moving from static pages toward useful interactive features.</span></article>
         </div>
       </div>
     </section>
@@ -644,18 +707,18 @@
     <section id="contact">
       <div class="wrap">
         <div class="section-head scroll-reveal">
-          <h2>Contact</h2>
-          <p>Open to school collaborations, feedback, and simple project ideas.</p>
+          <h2>Let's Connect</h2>
+          <p>I'm always interested in learning, collaborating, and creating new things through code.</p>
         </div>
         <div class="contact-grid">
-          <article class="panel scroll-reveal">
-            <p>The easiest way to reach me is by email. Social links below are placeholders — swap them for your real profiles when you are ready.</p>
-            <p class="note">Edit the href values in the contact buttons to use your own accounts.</p>
+          <article class="contact-panel scroll-reveal">
+            <p>Email, GitHub, and Facebook buttons are placeholders. Edit the <code>data-url</code> values in this file with your real links before sharing the site.</p>
+            <p class="hint">No contact details were invented. Empty placeholders will not open a fake page.</p>
           </article>
           <div class="contact-actions scroll-reveal">
-            <a class="btn btn-primary" href="mailto:kaito@example.com">Email Me</a>
-            <a class="btn btn-ghost" href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
-            <a class="btn btn-ghost" href="https://facebook.com/your-profile" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a class="btn btn-primary" href="#" data-url="INSERT_EMAIL_ADDRESS">Email</a>
+            <a class="btn btn-ghost" href="#" data-url="INSERT_GITHUB_PROFILE_URL">GitHub</a>
+            <a class="btn btn-ghost" href="#" data-url="INSERT_FACEBOOK_PROFILE_URL">Facebook</a>
           </div>
         </div>
       </div>
@@ -665,15 +728,16 @@
   <footer>
     <p>Designed & Developed by Kaito · <span id="year"></span></p>
   </footer>
-
-  <button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
+  <button class="top-btn" id="topBtn" type="button" aria-label="Back to top">↑</button>
 
   <script>
-    const year = document.getElementById("year");
-    year.textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
+    const nav = document.getElementById("nav");
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
+    const links = navLinks.querySelectorAll("a");
+    const topBtn = document.getElementById("topBtn");
 
     menuBtn.addEventListener("click", () => {
       const open = navLinks.classList.toggle("open");
@@ -681,7 +745,7 @@
       menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
 
-    navLinks.querySelectorAll("a").forEach((link) => {
+    links.forEach((link) => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("open");
         menuBtn.setAttribute("aria-expanded", "false");
@@ -689,13 +753,31 @@
       });
     });
 
-    const sections = document.querySelectorAll("main section[id]");
-    const links = document.querySelectorAll(".nav-links a");
+    document.querySelectorAll("[data-url]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const value = link.dataset.url || "";
+        if (value.startsWith("INSERT_")) {
+          event.preventDefault();
+          link.textContent = "Add your link in index.html";
+          return;
+        }
+        if (value.startsWith("mailto:") || value.startsWith("http")) {
+          link.setAttribute("href", value);
+          if (value.startsWith("http")) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        }
+      });
+    });
 
+    const revealItems = document.querySelectorAll(".scroll-reveal");
+    const sections = document.querySelectorAll("main section[id]");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        if (entry.target.id) {
           links.forEach((link) => {
             link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
           });
@@ -703,16 +785,17 @@
       });
     }, { threshold: 0.28 });
 
-    document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+    revealItems.forEach((item) => observer.observe(item));
     sections.forEach((section) => observer.observe(section));
 
-    const topBtn = document.getElementById("topBtn");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.addEventListener("scroll", () => {
-      topBtn.classList.toggle("show", window.scrollY > 400);
+      nav.classList.toggle("scrolled", window.scrollY > 8);
+      topBtn.classList.toggle("show", window.scrollY > 420);
     });
 
     topBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     });
   </script>
 </body>
