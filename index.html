@@ -218,6 +218,84 @@
       margin-bottom: 12px;
     }
 
+    /* ---------- Project subsections ---------- */
+    .project-group { margin-top: 4px; }
+    .project-group + .project-group {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px dashed var(--line);
+    }
+    .subhead {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-2);
+      margin-bottom: 4px;
+    }
+    .subhead::before {
+      content: "";
+      width: 16px;
+      height: 3px;
+      border-radius: 3px;
+      background: currentColor;
+      flex: none;
+    }
+    .subhead.wip-head { color: var(--wip); }
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-bottom: 14px;
+    }
+
+    /* ---------- Status badges ---------- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid transparent;
+    }
+    .badge .bdot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex: none;
+      background: currentColor;
+    }
+    .badge.working {
+      color: #047857;
+      background: rgba(16, 185, 129, 0.14);
+      border-color: rgba(16, 185, 129, 0.38);
+    }
+    .badge.working .bdot {
+      background: #10B981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.9);
+    }
+    html[data-theme="dark"] .badge.working {
+      color: #6EE7B7;
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(52, 211, 153, 0.4);
+    }
+    .badge.wip {
+      color: var(--wip);
+      background: rgba(139, 92, 246, 0.18);
+      border-color: rgba(196, 181, 253, 0.38);
+    }
+    .badge.wip .bdot {
+      background: #8B5CF6;
+      box-shadow: 0 0 6px rgba(139, 92, 246, 0.9);
+    }
+
     .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .project {
       background: var(--soft);
@@ -262,8 +340,12 @@
     .shot.z { background: linear-gradient(145deg, #4c1d95, #1e1b4b); }
     .body { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
     .kicker { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
-    .project h2 { font-size: 1.02rem; }
+    .project h4 { font-size: 1.02rem; }
     .project p { color: var(--muted); font-size: 0.86rem; }
+    .project .badge { color: inherit; }
+    .project .badge.working { color: #047857; }
+    html[data-theme="dark"] .project .badge.working { color: #6EE7B7; }
+    .project .badge.wip { color: var(--wip); }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag { font-size: 0.7rem; color: var(--tag); border: 1px solid var(--line); border-radius: 999px; padding: 3px 7px; }
     .link {
@@ -358,6 +440,9 @@
       to { opacity: 1; transform: none; }
     }
 
+    @media (max-width: 980px) {
+      .projects { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 800px) {
       .projects { grid-template-columns: 1fr; }
       .shot { height: 180px; }
@@ -396,7 +481,7 @@
           <img class="alt" src="assets/profile 2.png" alt="" onerror="this.style.display='none'">
         </div>
         <div>
-          <p class="status"><span class="dot"></span> OPEN TO LEARNING & OPPORTUNITIES</p>
+          <p class="status"><span class="dot"></span> OPEN TO LEARNING &amp; OPPORTUNITIES</p>
           <h1>Ron Matthew Ferreras</h1>
           <p class="role">Aspiring Web Developer</p>
           <p class="meta">ICT Student · Mabayuhan Senior High School</p>
@@ -419,7 +504,7 @@
           <span class="chip">CSS3</span>
           <span class="chip">JavaScript</span>
           <span class="chip">Responsive Web Design</span>
-          <span class="chip">Git & GitHub</span>
+          <span class="chip">Git &amp; GitHub</span>
           <span class="chip">Supabase</span>
           <span class="chip">Netlify</span>
         </div>
@@ -443,98 +528,119 @@
 
       <section class="block" id="projects" aria-labelledby="projects-title">
         <h2 class="label" id="projects-title">Selected projects</h2>
-        <div class="projects">
-          <article class="project">
-            <div class="shot" data-fallback="Add assets/projects/tambayan-cawag.jpg">
-              <img src="assets/tambayan-cawag.jpg" alt="Preview of the Tambayan Cawag restaurant web application" onerror="this.parentElement.classList.add('missing')">
-            </div>
-            <div class="body">
-              <p class="kicker">Restaurant web application</p>
-              <h2>Tambayan Cawag</h2>
-              <p>A restaurant website with a digital menu, customer ordering, dine-in reservations, and an admin dashboard.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Supabase</span></div>
-              <a class="link" href="https://lbs-ui.github.io/TC/" target="_blank" rel="noopener noreferrer">Live Project</a>
-            </div>
-          </article>
 
-          <article class="project">
-            <div class="shot" data-fallback="Add assets/Digital YearBook.jpg">
-              <img src="assets/Digital YearBook.jpg" alt="Preview of the Digital Yearbook school project" onerror="this.parentElement.classList.add('missing')">
-            </div>
-            <div class="body">
-              <p class="kicker">School project</p>
-              <h2>Digital Yearbook</h2>
-              <p>A digital yearbook project for presenting school memories. No separate live demo link yet.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-              <a class="link" href="https://lbs-ui.github.io/TECH-B/" target="_blank" rel="noopener noreferrer">Live Project</a>
-            </div>
-          </article>
+        <!-- ============ WORKING PROJECTS ============ -->
+        <div class="project-group" aria-labelledby="working-title">
+          <h3 class="subhead" id="working-title">Working projects</h3>
+          <p class="subtitle">Projects that are currently functional and available to explore.</p>
 
-          <article class="project">
-            <div class="shot club" data-fallback="Add assets/multimedia-club.jpg">
-              <img src="assets/multimedia-club.jpg" alt="Preview of the Multimedia Club school organization website" onerror="this.parentElement.classList.add('missing')">
-            </div>
-            <div class="body">
-              <p class="kicker">School organization website</p>
-              <h2>Multimedia Club</h2>
-              <p>Modern website created for a school multimedia club and student organization.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span></div>
-              <a class="link" href="https://multimedia-club.netlify.app" target="_blank" rel="noopener noreferrer">Live project</a>
-            </div>
-          </article>
+          <div class="projects">
+            <article class="project">
+              <div class="shot" data-fallback="Add assets/projects/tambayan-cawag.jpg">
+                <img src="assets/tambayan-cawag.jpg" alt="Preview of the Tambayan Cawag restaurant web application" onerror="this.parentElement.classList.add('missing')">
+              </div>
+              <div class="body">
+                <p class="badge working"><span class="bdot" aria-hidden="true"></span>Working</p>
+                <p class="kicker">Restaurant web application</p>
+                <h4>Tambayan Cawag</h4>
+                <p>A restaurant website with a digital menu, customer ordering, dine-in reservations, and an admin dashboard.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Supabase</span></div>
+                <a class="link" href="https://lbs-ui.github.io/TC/" target="_blank" rel="noopener noreferrer">Live Project</a>
+              </div>
+            </article>
 
-          <article class="project z">
-            <div class="shot z" data-fallback="Still in progress">
-              <img src="assets/zimelia.jpg" alt="Concept preview of Zimelia, an AI assistant project still in development" onerror="this.parentElement.classList.add('missing')">
-            </div>
-            <div class="body">
-              <p class="wip">WORK IN PROGRESS</p>
-              <p class="kicker">AI assistant concept</p>
-              <h2>Zimelia</h2>
-              <p>An ongoing AI assistant concept exploring character-based interaction, expressive interfaces, and personalized user experiences.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-              <button class="link static" type="button" disabled>In development</button>
-            </div>
-          </article>
+            <article class="project">
+              <div class="shot" data-fallback="Add assets/Digital YearBook.jpg">
+                <img src="assets/Digital YearBook.jpg" alt="Preview of the Digital Yearbook school project" onerror="this.parentElement.classList.add('missing')">
+              </div>
+              <div class="body">
+                <p class="badge working"><span class="bdot" aria-hidden="true"></span>Working</p>
+                <p class="kicker">School project</p>
+                <h4>Digital Yearbook</h4>
+                <p>A digital yearbook project for presenting school memories. No separate live demo link yet.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                <a class="link" href="https://lbs-ui.github.io/TECH-B/" target="_blank" rel="noopener noreferrer">Live Project</a>
+              </div>
+            </article>
 
-          <article class="project">
-            <div class="shot" data-fallback="Add assets/learnerhub reviewer.jpg">
-              <img src="assets/learnerhub reviewer.jpg" alt="Preview of the LearnerHub Reviewer project" onerror="this.parentElement.classList.add('missing')">
-            </div>
-            <div class="body">
-              <p class="kicker">School project</p>
-              <h2>LearnerHub Reviewer</h2>
-              <p>A reviewer project for studying and practice.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-              <a class="link" href="https://kaitoren873.github.io/School-LearnerHub/" target="_blank" rel="noopener noreferrer">Live Project</a>
-            </div>
-          </article>
+            <article class="project">
+              <div class="shot club" data-fallback="Add assets/multimedia-club.jpg">
+                <img src="assets/multimedia-club.jpg" alt="Preview of the Multimedia Club school organization website" onerror="this.parentElement.classList.add('missing')">
+              </div>
+              <div class="body">
+                <p class="badge working"><span class="bdot" aria-hidden="true"></span>Working</p>
+                <p class="kicker">School organization website</p>
+                <h4>Multimedia Club</h4>
+                <p>Modern website created for a school multimedia club and student organization.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span></div>
+                <a class="link" href="https://multimedia-club.netlify.app" target="_blank" rel="noopener noreferrer">Live project</a>
+              </div>
+            </article>
 
-          <article class="project">
-            <div class="shot" data-fallback="Add assets/website builder.jpg">
-              <img src="assets/website builder.jpg" alt="Preview of the Website Builder project" onerror="this.parentElement.classList.add('missing')">
-            </div>
-            <div class="body">
-              <p class="kicker">Web project</p>
-              <h2>Website_Builder</h2>
-              <p>A website builder project focused on putting pages together.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-              <a class="link" href="https://kaitoren873.github.io/Website_Builder/" target="_blank" rel="noopener noreferrer">Live Project</a>
-            </div>
-          </article>
+            <article class="project">
+              <div class="shot" data-fallback="Add assets/learnerhub reviewer.jpg">
+                <img src="assets/learnerhub reviewer.jpg" alt="Preview of the LearnerHub Reviewer project" onerror="this.parentElement.classList.add('missing')">
+              </div>
+              <div class="body">
+                <p class="badge working"><span class="bdot" aria-hidden="true"></span>Working</p>
+                <p class="kicker">School project</p>
+                <h4>LearnerHub Reviewer</h4>
+                <p>A reviewer project for studying and practice.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                <a class="link" href="https://kaitoren873.github.io/School-LearnerHub/" target="_blank" rel="noopener noreferrer">Live Project</a>
+              </div>
+            </article>
 
-          <article class="project">
-            <div class="shot" data-fallback="Add assets/mshs poll.jpg">
-              <img src="assets/mshs poll.jpg" alt="Preview of the MSHS Poll project" onerror="this.parentElement.classList.add('missing')">
-            </div>
-            <div class="body">
-              <p class="kicker">School project</p>
-              <h2>MSHS-Poll</h2>
-              <p>A poll project connected to Mabayuhan Senior High School.</p>
-              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-              <a class="link" href="https://kaitoren873.github.io/MSHS-Poll/" target="_blank" rel="noopener noreferrer">Live Project</a>
-            </div>
-          </article>
+            <article class="project">
+              <div class="shot" data-fallback="Add assets/website builder.jpg">
+                <img src="assets/website builder.jpg" alt="Preview of the Website Builder project" onerror="this.parentElement.classList.add('missing')">
+              </div>
+              <div class="body">
+                <p class="badge working"><span class="bdot" aria-hidden="true"></span>Working</p>
+                <p class="kicker">Web project</p>
+                <h4>Website_Builder</h4>
+                <p>A website builder project focused on putting pages together.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                <a class="link" href="https://kaitoren873.github.io/Website_Builder/" target="_blank" rel="noopener noreferrer">Live Project</a>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="shot" data-fallback="Add assets/mshs poll.jpg">
+                <img src="assets/mshs poll.jpg" alt="Preview of the MSHS Poll project" onerror="this.parentElement.classList.add('missing')">
+              </div>
+              <div class="body">
+                <p class="badge working"><span class="bdot" aria-hidden="true"></span>Working</p>
+                <p class="kicker">School project</p>
+                <h4>MSHS-Poll</h4>
+                <p>A poll project connected to Mabayuhan Senior High School.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                <a class="link" href="https://kaitoren873.github.io/MSHS-Poll/" target="_blank" rel="noopener noreferrer">Live Project</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- ============ WORK IN PROGRESS ============ -->
+        <div class="project-group" aria-labelledby="wip-title">
+          <h3 class="subhead wip-head" id="wip-title">Work in progress</h3>
+          <p class="subtitle">Projects that are currently being developed or improved.</p>
+
+          <div class="projects">
+            <article class="project z">
+              <div class="shot z" data-fallback="Still in progress">
+                <img src="assets/zimelia.jpg" alt="Concept preview of Zimelia, an AI assistant project still in development" onerror="this.parentElement.classList.add('missing')">
+              </div>
+              <div class="body">
+                <p class="badge wip"><span class="bdot" aria-hidden="true"></span>Work in progress</p>
+                <p class="kicker">AI assistant concept</p>
+                <h4>Zimelia</h4>
+                <p>An ongoing AI assistant concept exploring character-based interaction, expressive interfaces, and personalized user experiences.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                <button class="link static" type="button" disabled>In development</button>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -548,7 +654,7 @@
       </section>
     </main>
 
-    <footer>Designed & Developed by Ron Matthew Ferreras · <span id="year"></span></footer>
+    <footer>Designed &amp; Developed by Ron Matthew Ferreras · <span id="year"></span></footer>
   </div>
 
   <script>
