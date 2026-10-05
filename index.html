@@ -6,10 +6,8 @@
   <meta name="description" content="Ron Matthew Ferreras — ICT student and aspiring web developer from Olongapo City. Developer ID card with selected school projects.">
   <title>Ron Matthew Ferreras | Developer ID</title>
   <script>
-    (function () {
-      var saved = localStorage.getItem("theme");
-      document.documentElement.setAttribute("data-theme", saved === "dark" ? "dark" : "light");
-    })();
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.removeItem("theme");
   </script>
   <style>
     html[data-theme="light"] {
@@ -19,16 +17,16 @@
       --card: rgba(255, 255, 255, 0.92);
       --blue: #2563EB;
       --blue-2: #1D4ED8;
-      --text: #0F172A;
-      --muted: #334155;
-      --line: rgba(15, 23, 42, 0.14);
-      --chip: rgba(37, 99, 235, 0.1);
-      --accent: #1D4ED8;
+      --text: #0B1220;
+      --muted: #1E293B;
+      --line: rgba(15, 23, 42, 0.18);
+      --chip: rgba(37, 99, 235, 0.14);
+      --accent: #1E40AF;
       --on-accent: #1E3A8A;
       --pill: #0F172A;
-      --tag: #1E293B;
+      --tag: #0F172A;
       --wip: #5B21B6;
-      --link-bg: rgba(37, 99, 235, 0.12);
+      --link-bg: rgba(37, 99, 235, 0.16);
       --link-text: #1E3A8A;
       --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
       --glow: 0 0 0 rgba(37, 99, 235, 0);
@@ -550,7 +548,6 @@
     themeBtn.addEventListener("click", () => {
       const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
       syncTheme();
     });
 
