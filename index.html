@@ -7,14 +7,32 @@
   <title>Ron Matthew Ferreras | Developer ID</title>
   <style>
     :root {
+      --bg: #F3F6FB;
+      --bg-2: #FFFFFF;
+      --card: rgba(255, 255, 255, 0.92);
+      --blue: #2563EB;
+      --blue-2: #1D4ED8;
+      --text: #0F172A;
+      --muted: #475569;
+      --line: rgba(15, 23, 42, 0.1);
+      --chip: rgba(37, 99, 235, 0.08);
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --glow: 0 0 0 rgba(37, 99, 235, 0);
+      --soft: rgba(15, 23, 42, 0.03);
+    }
+    html[data-theme="dark"] {
       --bg: #0B1026;
       --bg-2: #111A35;
+      --card: rgba(17, 26, 53, 0.78);
       --blue: #3B82F6;
       --blue-2: #60A5FA;
       --text: #F8FAFC;
       --muted: #94A3B8;
       --line: rgba(148, 163, 184, 0.18);
+      --chip: rgba(59, 130, 246, 0.1);
       --shadow: 0 24px 60px rgba(2, 6, 23, 0.45);
+      --glow: 0 0 40px rgba(59, 130, 246, 0.12);
+      --soft: rgba(11, 16, 38, 0.45);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,9 +42,9 @@
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(700px 380px at 15% 0%, rgba(59, 130, 246, 0.2), transparent 60%),
-        radial-gradient(520px 320px at 100% 10%, rgba(99, 102, 241, 0.14), transparent 55%),
+        radial-gradient(700px 380px at 15% 0%, rgba(37, 99, 235, 0.12), transparent 60%),
         var(--bg);
+      color: var(--text);
       line-height: 1.55;
     }
     a { color: inherit; text-decoration: none; }
@@ -57,7 +75,18 @@
       margin-bottom: 14px;
       gap: 12px;
     }
-    .brand { font-weight: 800; letter-spacing: 0.04em; font-size: 0.92rem; }
+    .theme-btn {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--text);
+      border-radius: 999px;
+      min-height: 36px;
+      padding: 0 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .theme-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
     .brand span { color: var(--blue-2); }
     .jumps { display: flex; gap: 8px; list-style: none; }
     .jumps a {
@@ -74,10 +103,10 @@
     }
 
     .card {
-      background: rgba(17, 26, 53, 0.78);
-      border: 1px solid rgba(96, 165, 250, 0.22);
+      background: var(--card);
+      border: 1px solid var(--line);
       border-radius: 28px;
-      box-shadow: var(--shadow), 0 0 40px rgba(59, 130, 246, 0.12);
+      box-shadow: var(--shadow), var(--glow);
       backdrop-filter: blur(14px);
       padding: 28px;
       animation: rise 0.7s ease both;
@@ -151,7 +180,7 @@
       letter-spacing: 0.03em;
       padding: 7px 11px;
     }
-    .chip { color: #bfdbfe; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.24); font-weight: 650; letter-spacing: 0; }
+    .chip { color: var(--blue-2); background: var(--chip); border-color: transparent; font-weight: 650; letter-spacing: 0; }
 
     .block { margin-top: 26px; }
     .label {
@@ -165,7 +194,7 @@
 
     .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .project {
-      background: rgba(11, 16, 38, 0.45);
+      background: var(--soft);
       border: 1px solid var(--line);
       border-radius: 18px;
       overflow: hidden;
@@ -245,6 +274,33 @@
       padding: 4px 8px;
     }
 
+    .edu {
+      display: grid;
+      border-left: 2px solid rgba(37, 99, 235, 0.35);
+      margin-left: 8px;
+    }
+    .edu-item {
+      position: relative;
+      margin: 0 0 14px 18px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--soft);
+    }
+    .edu-item::before {
+      content: "";
+      position: absolute;
+      left: -25px;
+      top: 18px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    }
+    .edu-item strong { display: block; font-size: 0.95rem; }
+    .edu-item span { display: block; color: var(--muted); font-size: 0.88rem; }
+
     .connect {
       display: flex;
       flex-wrap: wrap;
@@ -296,10 +352,14 @@
   <div class="page">
     <div class="top">
       <p class="brand">RON MATTHEW<span>.</span></p>
-      <ul class="jumps">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#connect">Connect</a></li>
-      </ul>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <ul class="jumps">
+          <li><a href="#education">Education</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#connect">Connect</a></li>
+        </ul>
+        <button class="theme-btn" id="themeBtn" type="button" aria-pressed="false">Dark mode</button>
+      </div>
     </div>
 
     <main class="card" id="card">
@@ -334,6 +394,22 @@
           <span class="chip">Git & GitHub</span>
           <span class="chip">Supabase</span>
           <span class="chip">Netlify</span>
+        </div>
+      </section>
+
+      <section class="block" id="education" aria-labelledby="edu-title">
+        <h2 class="label" id="edu-title">Education</h2>
+        <div class="edu">
+          <article class="edu-item">
+            <strong>ICT - Informational and Computer Services</strong>
+            <span>(MSHS) Mabayuhan Senior High School</span>
+            <span>2025 - 2027</span>
+          </article>
+          <article class="edu-item">
+            <strong>Electrical Installation and Maintenance (EIM)</strong>
+            <span>(GHNHS) Gordon Heights National High School</span>
+            <span>2021 - 2025</span>
+          </article>
         </div>
       </section>
 
@@ -398,6 +474,29 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark") root.setAttribute("data-theme", "dark");
+
+    function syncTheme() {
+      const dark = root.getAttribute("data-theme") === "dark";
+      themeBtn.textContent = dark ? "Light mode" : "Dark mode";
+      themeBtn.setAttribute("aria-pressed", String(dark));
+    }
+    syncTheme();
+    themeBtn.addEventListener("click", () => {
+      const dark = root.getAttribute("data-theme") === "dark";
+      if (dark) {
+        root.removeAttribute("data-theme");
+        localStorage.setItem("theme", "light");
+      } else {
+        root.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+      }
+      syncTheme();
+    });
 
     document.querySelectorAll("[data-url]").forEach((link) => {
       link.addEventListener("click", (event) => {
