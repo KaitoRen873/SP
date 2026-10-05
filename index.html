@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kaito — Aspiring Web Developer and ICT student from Olongapo City. Portfolio of frontend projects, responsive websites, and web applications.">
+  <title>Kaito | Aspiring Web Developer</title>
+  <style>
+    :root {
+      --bg: #0B1026;
+      --bg-soft: #111833;
+      --primary: #3B82F6;
+      --primary-deep: #1D4ED8;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --line: rgba(148, 163, 184, 0.18);
+      --glass: rgba(15, 23, 52, 0.72);
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(2, 6, 23, 0.45);
+      --nav-h: 76px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% -10%, rgba(59, 130, 246, 0.22), transparent 60%),
+        radial-gradient(700px 420px at 100% 8%, rgba(99, 102, 241, 0.16), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      backdrop-filter: blur(16px);
+      background: rgba(11, 16, 38, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .logo span { color: var(--primary); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.14);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .menu-btn span,
+    .menu-btn span::before,
+    .menu-btn span::after {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      position: relative;
+      margin: 0 auto;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .menu-btn span::before,
+    .menu-btn span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-btn span::before { top: -6px; }
+    .menu-btn span::after { top: 6px; }
+
+    .menu-btn[aria-expanded="true"] span { background: transparent; }
+    .menu-btn[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+    .menu-btn[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0 40px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 12px var(--primary);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: #dbe7ff;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #60a5fa, var(--primary-deep));
+      color: white;
+      box-shadow: 0 10px 28px rgba(59, 130, 246, 0.35);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .terminal {
+      background: rgba(8, 12, 30, 0.85);
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      border-radius: 22px;
+      box-shadow: var(--shadow), 0 0 40px rgba(59, 130, 246, 0.12);
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .traffic { width: 10px; height: 10px; border-radius: 50%; }
+    .red { background: #fb7185; }
+    .yellow { background: #fbbf24; }
+    .green { background: #34d399; }
+
+    .terminal-title {
+      margin-left: 8px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .terminal pre {
+      padding: 22px 20px 26px;
+      font-family: "Cascadia Code", "Consolas", monospace;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #dbeafe;
+      white-space: pre-wrap;
+    }
+
+    .c-key { color: #93c5fd; }
+    .c-str { color: #86efac; }
+    .c-com { color: #64748b; }
+    .c-fn { color: #f9a8d4; }
+
+    section { padding: 72px 0; }
+
+    .section-head { margin-bottom: 28px; max-width: 680px; }
+
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .section-head p { color: var(--muted); }
+
+    .about-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+
+    .card, .skill, .project, .learn-item, .panel {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+    }
+
+    .card, .panel { padding: 26px; box-shadow: var(--shadow); }
+
+    .card p + p { margin-top: 12px; color: var(--muted); }
+    .card p { color: #e2e8f0; }
+
+    .facts { display: grid; gap: 12px; }
+    .fact {
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.18);
+    }
+    .fact strong { display: block; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+    .fact span { color: var(--text); }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .skill {
+      padding: 18px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow: 0 0 24px rgba(59, 130, 246, 0.16);
+    }
+
+    .skill h3 { font-size: 1.05rem; margin: 10px 0 6px; }
+    .skill p { color: var(--muted); font-size: 0.92rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #bfdbfe;
+      background: rgba(59, 130, 246, 0.16);
+      border-radius: 999px;
+      padding: 4px 8px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .art {
+      height: 148px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .art-1 { background: linear-gradient(145deg, #1e3a8a, #0f172a 70%); }
+    .art-2 { background: linear-gradient(145deg, #0e7490, #0b1026 72%); }
+    .art-3 { background: linear-gradient(145deg, #6d28d9, #1e1b4b 70%); }
+
+    .glyph {
+      width: 74px;
+      height: 74px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 0 28px rgba(255, 255, 255, 0.08);
+      font-size: 1.7rem;
+    }
+
+    .project-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .category { color: #93c5fd; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+    .project h3 { font-size: 1.25rem; }
+    .project p { color: var(--muted); flex: 1; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 0.78rem;
+      color: #e2e8f0;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 9px;
+    }
+
+    .project-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .mini {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: white;
+      background: rgba(59, 130, 246, 0.18);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .mini:hover { background: rgba(59, 130, 246, 0.32); }
+
+    .learning {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .learn-item { padding: 18px; }
+    .learn-item strong { display: block; margin-bottom: 6px; }
+    .learn-item span { color: var(--muted); font-size: 0.92rem; }
+
+    .contact-actions { display: flex; flex-direction: column; gap: 10px; }
+    .note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 90px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .top-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      background: #122047;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .top-btn.show { opacity: 1; pointer-events: auto; }
+    .top-btn:hover { transform: translateY(-2px); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 0.7s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.12s; }
+    .delay-2 { animation-delay: 0.24s; }
+
+    .scroll-reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .scroll-reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 900px) {
+      .hero, .about-grid, .contact-grid, .projects, .skills, .learning {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .projects { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .menu-btn { display: grid; place-items: center; }
+      .nav-links {
+        position: absolute;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px;
+        background: rgba(11, 16, 38, 0.96);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px; }
+      .skills, .learning { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal, .scroll-reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="#home">KAITO<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home">
+      <div>
+        <p class="eyebrow reveal"><span class="dot"></span> Olongapo City, Philippines</p>
+        <h1 class="reveal delay-1">Hi, I'm Kaito.</h1>
+        <p class="subtitle reveal delay-1">Aspiring Web Developer & ICT Student</p>
+        <p class="lead reveal delay-2">I build creative, functional, and responsive web experiences — from clean interfaces to practical school and community projects I can keep improving.</p>
+        <div class="actions reveal delay-2">
+          <a class="btn btn-primary" href="#projects">View My Projects</a>
+          <a class="btn btn-ghost" href="#contact">Contact Me</a>
+        </div>
+      </div>
+      <div class="terminal reveal delay-2" aria-hidden="true">
+        <div class="terminal-bar">
+          <span class="traffic red"></span>
+          <span class="traffic yellow"></span>
+          <span class="traffic green"></span>
+          <span class="terminal-title">kaito.dev — portfolio.js</span>
+        </div>
+        <pre><span class="c-com">// currently building</span>
+<span class="c-key">const</span> kaito = {
+  role: <span class="c-str">"ICT student"</span>,
+  focus: [<span class="c-str">"frontend"</span>, <span class="c-str">"UI"</span>, <span class="c-str">"apps"</span>],
+  goal: <span class="c-str">"ship useful websites"</span>
+};
+
+<span class="c-fn">learn</span>(<span class="c-str">"JavaScript + databases"</span>);</pre>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head scroll-reveal">
+          <h2>About Me</h2>
+          <p>A student portfolio focused on learning by building.</p>
+        </div>
+        <div class="about-grid">
+          <article class="card scroll-reveal">
+            <p>I'm Kaito, an ICT student in Olongapo City learning web development by making real projects. I enjoy turning simple ideas into pages people can actually use — menus, club sites, and small web apps.</p>
+            <p>Right now I'm focused on frontend development, website design, and web applications. I'm also starting to connect interfaces with databases so projects can store orders, registrations, and other real data.</p>
+            <p>I like learning new technologies one project at a time, keeping the work humble, clear, and useful for school and local communities.</p>
+          </article>
+          <aside class="facts scroll-reveal">
+            <div class="fact"><strong>Location</strong><span>Olongapo City, Philippines</span></div>
+            <div class="fact"><strong>Focus</strong><span>Frontend, responsive sites, UI design</span></div>
+            <div class="fact"><strong>Also exploring</strong><span>Database integration and web apps</span></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head scroll-reveal">
+          <h2>Skills</h2>
+          <p>Technologies and tools I am learning or working with — not expert-level claims.</p>
+        </div>
+        <div class="skills">
+          <article class="skill scroll-reveal"><span class="badge">Learning</span><h3>HTML5</h3><p>Semantic structure for clear, accessible pages.</p></article>
+          <article class="skill scroll-reveal"><span class="badge">Learning</span><h3>CSS3</h3><p>Layouts, responsive design, and visual polish.</p></article>
+          <article class="skill scroll-reveal"><span class="badge">Practicing</span><h3>JavaScript</h3><p>Interactions, menus, and small app features.</p></article>
+          <article class="skill scroll-reveal"><span class="badge">Practicing</span><h3>Responsive Web Design</h3><p>Layouts that work on phone, tablet, and desktop.</p></article>
+          <article class="skill scroll-reveal"><span class="badge">Using</span><h3>Git and GitHub</h3><p>Saving progress and sharing project source code.</p></article>
+          <article class="skill scroll-reveal"><span class="badge">Exploring</span><h3>Supabase</h3><p>Simple database features for web applications.</p></article>
+          <article class="skill scroll-reveal"><span class="badge">Exploring</span><h3>Firebase</h3><p>Trying hosted data and app services.</p></article>
+          <article class="skill scroll-reveal"><span class="badge">Using</span><h3>Netlify</h3><p>Publishing static sites with a live link.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head scroll-reveal">
+          <h2>Featured Projects</h2>
+          <p>School and concept builds. Replace the placeholder links with your real URLs.</p>
+        </div>
+        <div class="projects">
+          <article class="project scroll-reveal">
+            <div class="art art-1"><div class="glyph" aria-hidden="true">🍜</div></div>
+            <div class="project-body">
+              <p class="category">Restaurant Web Application</p>
+              <h3>Tambayan Cawag</h3>
+              <p>A restaurant website featuring a digital menu, customer ordering, dine-in reservations, and an admin dashboard.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Supabase</span></div>
+              <div class="project-links">
+                <a class="mini" href="https://example.com/tambayan-cawag" target="_blank" rel="noopener noreferrer">Live Demo</a>
+                <a class="mini" href="https://github.com/your-username/tambayan-cawag" target="_blank" rel="noopener noreferrer">Source Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="project scroll-reveal">
+            <div class="art art-2"><div class="glyph" aria-hidden="true">🎬</div></div>
+            <div class="project-body">
+              <p class="category">School Organization Website</p>
+              <h3>Multimedia Club</h3>
+              <p>A modern website for a school multimedia club, designed to provide information, promote activities, and support student registration.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span></div>
+              <div class="project-links">
+                <a class="mini" href="https://multimedia-club.netlify.app" target="_blank" rel="noopener noreferrer">Live Demo</a>
+                <a class="mini" href="https://github.com/your-username/multimedia-club" target="_blank" rel="noopener noreferrer">Source Code</a>
+              </div>
+            </div>
+          </article>
+          <article class="project scroll-reveal">
+            <div class="art art-3"><div class="glyph" aria-hidden="true">✦</div></div>
+            <div class="project-body">
+              <p class="category">AI Assistant Concept</p>
+              <h3>Zimelia</h3>
+              <p>A purple-themed AI assistant website concept featuring a character-based interface, interactive expressions, and a friendly user experience.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+              <div class="project-links">
+                <a class="mini" href="https://example.com/zimelia" target="_blank" rel="noopener noreferrer">Live Demo</a>
+                <a class="mini" href="https://github.com/your-username/zimelia" target="_blank" rel="noopener noreferrer">Source Code</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <div class="wrap">
+        <div class="section-head scroll-reveal">
+          <h2>Currently Learning</h2>
+          <p>Where the next practice hours are going.</p>
+        </div>
+        <div class="learning">
+          <article class="learn-item scroll-reveal"><strong>Improving JavaScript</strong><span>Functions, DOM updates, and cleaner project code.</span></article>
+          <article class="learn-item scroll-reveal"><strong>Backend integration</strong><span>Connecting forms and dashboards to real data.</span></article>
+          <article class="learn-item scroll-reveal"><strong>Responsive websites</strong><span>Better spacing and navigation on small screens.</span></article>
+          <article class="learn-item scroll-reveal"><strong>Databases and APIs</strong><span>Understanding how apps read and save information.</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head scroll-reveal">
+          <h2>Contact</h2>
+          <p>Open to school collaborations, feedback, and simple project ideas.</p>
+        </div>
+        <div class="contact-grid">
+          <article class="panel scroll-reveal">
+            <p>The easiest way to reach me is by email. Social links below are placeholders — swap them for your real profiles when you are ready.</p>
+            <p class="note">Edit the href values in the contact buttons to use your own accounts.</p>
+          </article>
+          <div class="contact-actions scroll-reveal">
+            <a class="btn btn-primary" href="mailto:kaito@example.com">Email Me</a>
+            <a class="btn btn-ghost" href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+            <a class="btn btn-ghost" href="https://facebook.com/your-profile" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Designed & Developed by Kaito · <span id="year"></span></p>
+  </footer>
+
+  <button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
+
+  <script>
+    const year = document.getElementById("year");
+    year.textContent = new Date().getFullYear();
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open menu");
+      });
+    });
+
+    const sections = document.querySelectorAll("main section[id]");
+    const links = document.querySelectorAll(".nav-links a");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          links.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.28 });
+
+    document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+    sections.forEach((section) => observer.observe(section));
+
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => {
+      topBtn.classList.toggle("show", window.scrollY > 400);
+    });
+
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+  </script>
+</body>
+</html>
