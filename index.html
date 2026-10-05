@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ron Matthew Ferreras — aspiring web developer and ICT student from Olongapo City. Portfolio of responsive websites and web applications.">
-  <title>Ron Matthew Ferreras | Aspiring Web Developer</title>
+  <meta name="description" content="Ron Matthew Ferreras — ICT student and aspiring web developer from Olongapo City. Developer ID card with selected school projects.">
+  <title>Ron Matthew Ferreras | Developer ID</title>
   <style>
     :root {
       --bg: #0B1026;
@@ -13,26 +13,24 @@
       --blue-2: #60A5FA;
       --text: #F8FAFC;
       --muted: #94A3B8;
-      --line: rgba(148, 163, 184, 0.16);
-      --glass: rgba(17, 26, 53, 0.72);
-      --radius: 20px;
-      --nav: 74px;
-      --shadow: 0 20px 50px rgba(2, 6, 23, 0.38);
+      --line: rgba(148, 163, 184, 0.18);
+      --shadow: 0 24px 60px rgba(2, 6, 23, 0.45);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
+      min-height: 100vh;
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      background:
-        radial-gradient(880px 480px at 8% -8%, rgba(59, 130, 246, 0.18), transparent 62%),
-        radial-gradient(640px 380px at 100% 0%, rgba(99, 102, 241, 0.12), transparent 58%),
-        var(--bg);
       color: var(--text);
-      line-height: 1.65;
+      background:
+        radial-gradient(700px 380px at 15% 0%, rgba(59, 130, 246, 0.2), transparent 60%),
+        radial-gradient(520px 320px at 100% 10%, rgba(99, 102, 241, 0.14), transparent 55%),
+        var(--bg);
+      line-height: 1.55;
     }
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img { display: block; max-width: 100%; }
     button { font: inherit; }
 
     .skip {
@@ -43,324 +41,156 @@
       color: white;
       padding: 8px 12px;
       border-radius: 8px;
-      z-index: 80;
+      z-index: 20;
     }
     .skip:focus { top: 12px; }
 
-    .wrap { width: min(1140px, calc(100% - 36px)); margin: 0 auto; }
+    .page {
+      width: min(1040px, calc(100% - 28px));
+      margin: 28px auto 40px;
+    }
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      height: var(--nav);
+    .top {
       display: flex;
-      align-items: center;
-      background: rgba(11, 16, 38, 0.72);
-      border-bottom: 1px solid transparent;
-      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-    .nav.scrolled {
-      background: rgba(11, 16, 38, 0.86);
-      backdrop-filter: blur(16px);
-      border-bottom-color: var(--line);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
-    }
-    .nav-inner {
-      width: min(1140px, calc(100% - 36px));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-    }
-    .logo {
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
-    }
-    .logo span { color: var(--blue-2); }
-    .nav-links { display: flex; gap: 4px; list-style: none; }
-    .nav-links a {
-      position: relative;
-      color: var(--muted);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-    }
-    .nav-links a:hover,
-    .nav-links a:focus-visible { color: var(--text); }
-    .nav-links a.active { color: var(--text); }
-    .nav-links a.active::after {
-      content: "";
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      bottom: 4px;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--blue);
-      box-shadow: 0 0 10px var(--blue);
-    }
-    .menu-btn {
-      display: none;
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text);
-      cursor: pointer;
-    }
-    .menu-btn span,
-    .menu-btn span::before,
-    .menu-btn span::after {
-      display: block;
-      width: 18px;
-      height: 2px;
-      margin: 0 auto;
-      background: var(--text);
-      position: relative;
-      border-radius: 2px;
-    }
-    .menu-btn span::before,
-    .menu-btn span::after { content: ""; position: absolute; left: 0; }
-    .menu-btn span::before { top: -6px; }
-    .menu-btn span::after { top: 6px; }
-    .menu-btn[aria-expanded="true"] span { background: transparent; }
-    .menu-btn[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
-    .menu-btn[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
       align-items: center;
-      padding: 64px 0 36px;
+      margin-bottom: 14px;
+      gap: 12px;
     }
-    .badge {
+    .brand { font-weight: 800; letter-spacing: 0.04em; font-size: 0.92rem; }
+    .brand span { color: var(--blue-2); }
+    .jumps { display: flex; gap: 8px; list-style: none; }
+    .jumps a {
+      color: var(--muted);
+      font-size: 0.86rem;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .jumps a:hover, .jumps a:focus-visible {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .card {
+      background: rgba(17, 26, 53, 0.78);
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      border-radius: 28px;
+      box-shadow: var(--shadow), 0 0 40px rgba(59, 130, 246, 0.12);
+      backdrop-filter: blur(14px);
+      padding: 28px;
+      animation: rise 0.7s ease both;
+    }
+
+    .identity {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 22px;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .photo {
+      width: 132px;
+      height: 132px;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(96, 165, 250, 0.5);
+      box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.1), 0 0 28px rgba(59, 130, 246, 0.25);
+      background: linear-gradient(160deg, rgba(59, 130, 246, 0.28), var(--bg-2));
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .photo.missing img { display: none; }
+    .photo.missing::after {
+      content: "assets/profile.png";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 12px;
+      color: #dbeafe;
+      font-size: 0.82rem;
+    }
+    .status {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
       color: #dbeafe;
       background: rgba(59, 130, 246, 0.12);
       border: 1px solid rgba(59, 130, 246, 0.28);
       border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      margin-bottom: 18px;
+      padding: 5px 10px;
+      margin-bottom: 8px;
     }
-    .pulse {
-      width: 8px;
-      height: 8px;
+    .dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #34d399;
-      box-shadow: 0 0 10px #34d399;
+      box-shadow: 0 0 8px #34d399;
     }
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 4.3rem);
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      margin-bottom: 14px;
-    }
-    .headline {
-      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-      font-weight: 650;
+    h1 { font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -0.03em; line-height: 1.1; }
+    .role { color: #dbeafe; font-weight: 650; margin-top: 6px; }
+    .meta { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
+    .intro { color: var(--muted); margin-top: 12px; max-width: 68ch; }
+
+    .pills, .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .pill, .chip {
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
       color: #e2e8f0;
-      margin-bottom: 16px;
-      max-width: 16ch;
-    }
-    .lead { color: var(--muted); max-width: 58ch; margin-bottom: 26px; font-size: 1.05rem; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 999px;
-      border: 1px solid transparent;
+      font-size: 0.78rem;
       font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.03em;
+      padding: 7px 11px;
     }
-    .btn:hover { transform: translateY(-2px); }
-    .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, #60a5fa, #2563eb);
-      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.32);
-    }
-    .btn-ghost {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--line);
-    }
-    .btn[disabled], .btn.is-static {
-      cursor: default;
-      opacity: 0.9;
-      transform: none;
-    }
+    .chip { color: #bfdbfe; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.24); font-weight: 650; letter-spacing: 0; }
 
-    .portrait-wrap { position: relative; justify-self: center; width: min(360px, 100%); }
-    .portrait-wrap::before {
-      content: "";
-      position: absolute;
-      inset: -18px -22px auto auto;
-      width: 140px;
-      height: 140px;
-      border-radius: 36px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.45), transparent 70%);
-      z-index: 0;
-    }
-    .portrait {
-      position: relative;
-      z-index: 1;
-      aspect-ratio: 4 / 5;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid rgba(96, 165, 250, 0.45);
-      box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.08), 0 0 40px rgba(59, 130, 246, 0.22), var(--shadow);
-      background:
-        linear-gradient(160deg, rgba(59, 130, 246, 0.25), rgba(17, 26, 53, 0.9)),
-        var(--bg-2);
-    }
-    .portrait img { width: 100%; height: 100%; object-fit: cover; }
-    .portrait.missing img { display: none; }
-    .portrait.missing::after {
-      content: "Add your photo at assets/profile.png";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      text-align: center;
-      color: #dbeafe;
-    }
-    .loc {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      z-index: 2;
-      background: rgba(11, 16, 38, 0.78);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 0.82rem;
-      backdrop-filter: blur(8px);
-    }
-
-    section { padding: 78px 0; }
-    .section-head { max-width: 680px; margin-bottom: 28px; }
-    h2 { font-size: clamp(1.8rem, 3vw, 2.45rem); letter-spacing: -0.03em; margin-bottom: 8px; }
-    .section-head p, .muted { color: var(--muted); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 22px;
-      align-items: start;
-    }
-    .mini-photo {
-      width: 180px;
-      aspect-ratio: 1;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid rgba(96, 165, 250, 0.35);
-      background: linear-gradient(160deg, rgba(59, 130, 246, 0.28), var(--bg-2));
-      position: relative;
-      box-shadow: var(--shadow);
-    }
-    .mini-photo img { width: 100%; height: 100%; object-fit: cover; }
-    .mini-photo.missing img { display: none; }
-    .mini-photo.missing::after {
-      content: "profile.png";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: #dbeafe;
-      font-size: 0.9rem;
-    }
-    .about-copy {
-      background: var(--glass);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-      backdrop-filter: blur(10px);
-    }
-    .about-copy p + p { margin-top: 12px; color: var(--muted); }
-    .info-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .info {
-      background: rgba(59, 130, 246, 0.08);
-      border: 1px solid rgba(59, 130, 246, 0.18);
-      border-radius: 16px;
-      padding: 14px;
-    }
-    .info strong { display: block; margin-bottom: 4px; }
-    .info span { color: var(--muted); font-size: 0.9rem; }
-
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-    .skill, .card, .journey-item, .contact-panel {
-      background: rgba(17, 26, 53, 0.84);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-    }
-    .skill {
-      padding: 18px;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .skill:hover {
-      transform: translateY(-4px);
-      border-color: rgba(59, 130, 246, 0.42);
-      box-shadow: 0 0 22px rgba(59, 130, 246, 0.14);
-    }
-    .mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: rgba(59, 130, 246, 0.14);
-      color: #bfdbfe;
+    .block { margin-top: 26px; }
+    .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-2);
       font-weight: 800;
       margin-bottom: 12px;
     }
-    .skill h3 { font-size: 1.05rem; margin-bottom: 6px; }
-    .skill p { color: var(--muted); font-size: 0.92rem; }
 
-    .projects { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
+    .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .project {
-      background: var(--bg-2);
+      background: rgba(11, 16, 38, 0.45);
       border: 1px solid var(--line);
-      border-radius: 24px;
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
     .project:hover {
-      transform: translateY(-6px);
-      border-color: rgba(59, 130, 246, 0.4);
-      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.35);
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow: 0 12px 28px rgba(2, 6, 23, 0.35), 0 0 18px rgba(59, 130, 246, 0.16);
     }
-    .project.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.25fr 0.9fr; }
     .shot {
-      min-height: 240px;
+      height: 132px;
       position: relative;
-      background: linear-gradient(145deg, #1e3a8a, #0b1026 70%);
+      overflow: hidden;
+      background: linear-gradient(145deg, #1e3a8a, #0b1026);
     }
-    .project.wide .shot { min-height: 320px; }
-    .shot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .project:hover .shot img { transform: scale(1.05); }
     .shot.missing img { display: none; }
     .shot.missing::after {
       content: attr(data-fallback);
@@ -368,431 +198,221 @@
       inset: 0;
       display: grid;
       place-items: center;
-      padding: 24px;
       text-align: center;
+      padding: 12px;
       color: #dbeafe;
+      font-size: 0.82rem;
     }
-    .shot.club { background: linear-gradient(145deg, #111827, #facc15 140%); }
-    .shot.club::before {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 8px;
-      background: linear-gradient(90deg, #facc15, #111827);
-      z-index: 1;
-    }
-    .shot.zimelia { background: linear-gradient(145deg, #4c1d95, #1e1b4b 68%); }
-    .project-body { padding: 22px; display: flex; flex-direction: column; gap: 12px; }
-    .kicker {
-      color: #93c5fd;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .project h3 { font-size: 1.4rem; }
-    .project p { color: var(--muted); }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      font-size: 0.78rem;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 4px 9px;
-      color: #e2e8f0;
-    }
-    .project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
-    .mini {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: white;
-      background: rgba(59, 130, 246, 0.16);
-      border: 1px solid rgba(59, 130, 246, 0.34);
-      border-radius: 999px;
-      padding: 8px 12px;
-    }
-    .mini:hover { background: rgba(59, 130, 246, 0.3); }
-    .wip {
+    .shot.club { background: linear-gradient(145deg, #111827, #ca8a04 150%); }
+    .shot.z { background: linear-gradient(145deg, #4c1d95, #1e1b4b); }
+    .body { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .kicker { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: #93c5fd; }
+    .project h2 { font-size: 1.02rem; }
+    .project p { color: var(--muted); font-size: 0.86rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 0.7rem; color: #e2e8f0; border: 1px solid var(--line); border-radius: 999px; padding: 3px 7px; }
+    .link {
+      margin-top: auto;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      background: rgba(59, 130, 246, 0.14);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 800;
       width: fit-content;
+    }
+    .link:hover { background: rgba(59, 130, 246, 0.28); }
+    .link[disabled], .static {
+      cursor: default;
+      opacity: 0.92;
+    }
+    .project.z { border-color: rgba(167, 139, 250, 0.35); }
+    .project.z:hover { border-color: rgba(196, 181, 253, 0.6); box-shadow: 0 12px 28px rgba(2, 6, 23, 0.35), 0 0 18px rgba(139, 92, 246, 0.2); }
+    .wip {
+      width: fit-content;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
       color: #e9d5ff;
       background: rgba(139, 92, 246, 0.18);
       border: 1px solid rgba(196, 181, 253, 0.35);
       border-radius: 999px;
-      padding: 5px 10px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+      padding: 4px 8px;
     }
-    .bar {
-      height: 6px;
+
+    .connect {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .connect a, .connect button {
+      min-height: 42px;
+      padding: 0 14px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-    .bar span {
-      display: block;
-      width: 38%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #8b5cf6, #c4b5fd);
-      animation: slide 1.8s ease-in-out infinite;
-    }
-    @keyframes slide {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(280%); }
-    }
-    .project.zimelia { border-color: rgba(139, 92, 246, 0.35); }
-    .project.club { box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.08); }
-
-    .journey {
-      display: grid;
-      gap: 0;
-      border-left: 2px solid rgba(59, 130, 246, 0.35);
-      margin-left: 10px;
-    }
-    .journey-item {
-      margin: 0 0 14px 22px;
-      padding: 18px 18px 18px 20px;
-      position: relative;
-    }
-    .journey-item::before {
-      content: "";
-      position: absolute;
-      left: -29px;
-      top: 22px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--blue);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
-    }
-    .journey-item strong { display: block; margin-bottom: 4px; }
-    .journey-item span { color: var(--muted); }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-    }
-    .contact-panel { padding: 26px; }
-    .contact-actions { display: flex; flex-direction: column; gap: 10px; }
-    .hint { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0 96px;
-      text-align: center;
-      color: var(--muted);
-    }
-    .top-btn {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1px solid rgba(59, 130, 246, 0.4);
-      background: #122047;
-      color: white;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font-weight: 700;
       cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      box-shadow: var(--shadow);
     }
-    .top-btn.show { opacity: 1; pointer-events: auto; }
+    .connect a.primary {
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      border-color: transparent;
+    }
+    .connect a:hover, .connect button:hover { transform: translateY(-2px); }
+    .note { color: var(--muted); font-size: 0.82rem; margin-top: 8px; }
 
-    .reveal { opacity: 0; transform: translateY(16px); animation: rise 0.7s ease forwards; }
-    .d1 { animation-delay: 0.1s; }
-    .d2 { animation-delay: 0.2s; }
-    .scroll-reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .scroll-reveal.visible { opacity: 1; transform: none; }
-    @keyframes rise { to { opacity: 1; transform: none; } }
+    footer { text-align: center; color: var(--muted); font-size: 0.88rem; margin-top: 16px; }
 
-    @media (max-width: 980px) {
-      .hero, .about-grid, .projects, .project.wide, .contact-grid, .skills { grid-template-columns: 1fr 1fr; }
-      .hero, .about-grid, .contact-grid, .project.wide { grid-template-columns: 1fr; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 800px) {
       .projects { grid-template-columns: 1fr; }
+      .shot { height: 180px; }
     }
-    @media (max-width: 720px) {
-      .menu-btn { display: grid; place-items: center; }
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: var(--nav);
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        padding: 10px 16px 16px;
-        background: rgba(11, 16, 38, 0.96);
-        border-bottom: 1px solid var(--line);
-      }
-      .nav-links.open { display: flex; }
-      .skills, .info-cards { grid-template-columns: 1fr; }
-      .about-grid { grid-template-columns: 1fr; }
-      .mini-photo { width: 140px; }
-      section { padding: 58px 0; }
+    @media (max-width: 640px) {
+      .card { padding: 18px; }
+      .identity { grid-template-columns: 1fr; justify-items: start; }
+      .photo { width: 104px; height: 104px; }
+      .jumps { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .reveal, .scroll-reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="nav" id="nav">
-    <div class="nav-inner">
-      <a class="logo" href="#home">RON MATTHEW<span>.</span></a>
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu"><span></span></button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
+  <a class="skip" href="#card">Skip to card</a>
+  <div class="page">
+    <div class="top">
+      <p class="brand">RON MATTHEW<span>.</span></p>
+      <ul class="jumps">
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#connect">Connect</a></li>
       </ul>
     </div>
-  </header>
 
-  <main id="main">
-    <section class="hero wrap" id="home">
-      <div>
-        <p class="badge reveal"><span class="pulse"></span> Open to Learning & Opportunities</p>
-        <h1 class="reveal d1">Hi, I'm Ron Matthew Ferreras.</h1>
-        <p class="headline reveal d1">Building Digital Experiences Through Code.</p>
-        <p class="lead reveal d2">I'm an aspiring web developer and ICT student passionate about creating modern, responsive, and functional websites. I enjoy turning ideas into interactive digital experiences while continuously improving my skills.</p>
-        <div class="actions reveal d2">
-          <a class="btn btn-primary" href="#projects">Explore My Projects</a>
-          <a class="btn btn-ghost" href="#contact">Contact Me</a>
+    <main class="card" id="card">
+      <section class="identity">
+        <div class="photo">
+          <img src="assets/profile.png" alt="Portrait of Ron Matthew Ferreras, an ICT student and aspiring web developer" onerror="this.parentElement.classList.add('missing')">
         </div>
-      </div>
-      <div class="portrait-wrap reveal d2">
-        <div class="portrait" id="heroPhoto">
-          <img src="assets/profile.png" alt="Portrait of Ron Matthew Ferreras, an ICT student and aspiring web developer from Olongapo City" onerror="this.parentElement.classList.add('missing')">
+        <div>
+          <p class="status"><span class="dot"></span> OPEN TO LEARNING & OPPORTUNITIES</p>
+          <h1>Ron Matthew Ferreras</h1>
+          <p class="role">Aspiring Web Developer</p>
+          <p class="meta">ICT Student · Mabayuhan Senior High School</p>
+          <p class="meta">Olongapo City, Philippines</p>
+          <p class="intro">I'm an ICT student passionate about web development and creating responsive, functional digital experiences. I enjoy learning through real projects and continuously improving my skills.</p>
         </div>
-        <p class="loc">Olongapo City, Philippines</p>
-      </div>
-    </section>
+      </section>
 
-    <section id="about">
-      <div class="wrap">
-        <div class="section-head scroll-reveal">
-          <h2>About Me</h2>
-          <p>A student learning web development by building real projects.</p>
-        </div>
-        <div class="about-grid">
-          <div class="mini-photo scroll-reveal">
-            <img src="assets/profile.png" alt="Small portrait of Ron Matthew Ferreras" onerror="this.parentElement.classList.add('missing')">
-          </div>
-          <div class="scroll-reveal">
-            <article class="about-copy">
-              <p>I'm Ron Matthew Ferreras, an ICT student from Mabayuhan Senior High School (MSHS) who enjoys building websites and exploring the world of web development. My journey involves learning through real projects, experimenting with new technologies, and continuously improving my coding skills.</p>
-              <p>I am especially interested in frontend development, responsive web design, website UI, web applications, and database integration. I am still learning, and I treat each project as practice rather than finished professional work.</p>
-            </article>
-            <div class="info-cards">
-              <article class="info"><strong>ICT Student</strong><span>Studying in Mabayuhan Senior High School (MSHS) and learning by doing.</span></article>
-              <article class="info"><strong>Aspiring Web Developer</strong><span>Practicing frontend, UI, and small web applications.</span></article>
-              <article class="info"><strong>Project-Based Learner</strong><span>Improving through school and personal builds.</span></article>
-            </div>
-          </div>
-        </div>
+      <div class="pills" aria-label="Quick info">
+        <span class="pill">ICT STUDENT</span>
+        <span class="pill">WEB DEVELOPMENT</span>
+        <span class="pill">UI / RESPONSIVE DESIGN</span>
+        <span class="pill">PROJECT-BASED LEARNING</span>
       </div>
-    </section>
 
-    <section id="skills">
-      <div class="wrap">
-        <div class="section-head scroll-reveal">
-          <h2>Technical Skills</h2>
-          <p>Tools I am learning or using in projects. These are not expert ratings.</p>
+      <section class="block" aria-labelledby="stack-title">
+        <h2 class="label" id="stack-title">Tech stack</h2>
+        <div class="stack">
+          <span class="chip">HTML5</span>
+          <span class="chip">CSS3</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Responsive Web Design</span>
+          <span class="chip">Git & GitHub</span>
+          <span class="chip">Supabase</span>
+          <span class="chip">Netlify</span>
         </div>
-        <div class="skills">
-          <article class="skill scroll-reveal"><div class="mark">H</div><h3>HTML5</h3><p>Semantic page structure and accessible content.</p></article>
-          <article class="skill scroll-reveal"><div class="mark">C</div><h3>CSS3</h3><p>Layouts, responsive styling, and visual details.</p></article>
-          <article class="skill scroll-reveal"><div class="mark">JS</div><h3>JavaScript</h3><p>Menus, interactions, and small app behavior.</p></article>
-          <article class="skill scroll-reveal"><div class="mark">R</div><h3>Responsive Web Design</h3><p>Pages that adapt to phone, tablet, and desktop.</p></article>
-          <article class="skill scroll-reveal"><div class="mark">G</div><h3>Git & GitHub</h3><p>Saving versions and sharing source code.</p></article>
-          <article class="skill scroll-reveal"><div class="mark">S</div><h3>Supabase</h3><p>Trying database features inside web apps.</p></article>
-          <article class="skill scroll-reveal"><div class="mark">N</div><h3>Netlify</h3><p>Publishing static sites with a live link.</p></article>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="projects">
-      <div class="wrap">
-        <div class="section-head scroll-reveal">
-          <h2>Featured Projects</h2>
-          <p>School and personal builds. Replace placeholder links only where a real URL exists.</p>
-        </div>
+      <section class="block" id="projects" aria-labelledby="projects-title">
+        <h2 class="label" id="projects-title">Selected projects</h2>
         <div class="projects">
-          <article class="project wide scroll-reveal">
-            <div class="shot" data-fallback="Add screenshot: assets/Digital YearBook.jpg">
-              <img src="assets/Digital YearBook.jpg" alt="Preview of the Digital Yearbook project" onerror="this.parentElement.classList.add('missing')">
+          <article class="project">
+            <div class="shot" data-fallback="Add assets/Digital YearBook.jpg">
+              <img src="assets/Digital YearBook.jpg" alt="Preview of the Digital Yearbook school project" onerror="this.parentElement.classList.add('missing')">
             </div>
-            <div class="project-body">
-              <p class="kicker">School Project</p>
-              <h3>Digital Yearbook</h3>
-              <p>A digital yearbook project built to present school memories in a simple website. A public link is not available yet, so this card is here as a project preview only.</p>
-              <div class="tags">
-                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
-              </div>
-              <div class="project-links">
-                <button class="mini btn is-static" type="button" disabled>Link not available yet</button>
-                <a class="mini" href="#" data-url="https://lbs-ui.github.io/TECH-B/">Source Code</a>
-              </div>
+            <div class="body">
+              <p class="kicker">School project</p>
+              <h2>Digital Yearbook</h2>
+              <p>A digital yearbook project for presenting school memories. No separate live demo link yet.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+              <a class="link" href="https://lbs-ui.github.io/TECH-B/" target="_blank" rel="noopener noreferrer">Project link</a>
             </div>
           </article>
 
-          <article class="project club scroll-reveal">
-            <div class="shot club" data-fallback="Add screenshot: assets/multimedia-club.jpg">
+          <article class="project">
+            <div class="shot club" data-fallback="Add assets/multimedia-club.jpg">
               <img src="assets/multimedia-club.jpg" alt="Preview of the Multimedia Club school organization website" onerror="this.parentElement.classList.add('missing')">
             </div>
-            <div class="project-body">
-              <p class="kicker">School Organization Website</p>
-              <h3>Multimedia Club</h3>
-              <p>A modern website for a school multimedia club, created to introduce the organization, showcase its purpose, and provide students with access to club information and registration.</p>
-              <div class="tags">
-                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span>
-              </div>
-              <div class="project-links">
-                <a class="mini" href="https://multimedia-club.netlify.app" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                <a class="mini" href="#" data-url="INSERT_MULTIMEDIA_CLUB_GITHUB_URL">Source Code</a>
-              </div>
+            <div class="body">
+              <p class="kicker">School organization website</p>
+              <h2>Multimedia Club</h2>
+              <p>Modern website created for a school multimedia club and student organization.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span></div>
+              <a class="link" href="https://multimedia-club.netlify.app" target="_blank" rel="noopener noreferrer">Live project</a>
             </div>
           </article>
 
-          <article class="project zimelia scroll-reveal">
-            <div class="shot zimelia" data-fallback="⚠️ still in work in progress ⚠️">
+          <article class="project z">
+            <div class="shot z" data-fallback="Still in progress">
               <img src="assets/projects/zimelia.jpg" alt="Concept preview of Zimelia, an AI assistant project still in development" onerror="this.parentElement.classList.add('missing')">
             </div>
-            <div class="project-body">
+            <div class="body">
               <p class="wip">WORK IN PROGRESS</p>
-              <p class="kicker">AI Assistant Concept</p>
-              <h3>Zimelia</h3>
-              <p>Zimelia is an ongoing personal project exploring the concept of a friendly AI assistant with a character-based interface, interactive expressions, and a personalized user experience. The project is currently under development.</p>
-              <div class="bar" aria-hidden="true"><span></span></div>
-              <div class="tags">
-                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
-              </div>
-              <div class="project-links">
-                <button class="mini btn is-static" type="button" disabled>Currently in Development</button>
-              </div>
+              <p class="kicker">AI assistant concept</p>
+              <h2>Zimelia</h2>
+              <p>An ongoing AI assistant concept exploring character-based interaction, expressive interfaces, and personalized user experiences.</p>
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+              <button class="link static" type="button" disabled>In development</button>
             </div>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="journey">
-      <div class="wrap">
-        <div class="section-head scroll-reveal">
-          <h2>Currently Learning</h2>
-          <p>A student growth path, not a work history.</p>
+      <section class="block" id="connect" aria-labelledby="connect-title">
+        <h2 class="label" id="connect-title">Connect</h2>
+        <div class="connect">
+          <a class="primary" href="mailto:guest67483@gmail.com">Email</a>
+          <a href="#" data-url="INSERT_GITHUB_PROFILE_URL">GitHub</a>
+          <a href="#" data-url="INSERT_PORTFOLIO_URL">Portfolio</a>
         </div>
-        <div class="journey">
-          <article class="journey-item scroll-reveal"><strong>Improving JavaScript fundamentals</strong><span>Practicing functions, the DOM, and clearer project code.</span></article>
-          <article class="journey-item scroll-reveal"><strong>Learning backend integration</strong><span>Connecting forms and simple dashboards to stored data.</span></article>
-          <article class="journey-item scroll-reveal"><strong>Understanding APIs and databases</strong><span>Learning how apps read, save, and update information.</span></article>
-          <article class="journey-item scroll-reveal"><strong>Developing better responsive layouts</strong><span>Improving spacing, navigation, and small-screen usability.</span></article>
-          <article class="journey-item scroll-reveal"><strong>Building more functional web applications</strong><span>Moving from static pages toward useful interactive features.</span></article>
-        </div>
-      </div>
-    </section>
+        <p class="note">Email is guest67483@gmail.com. GitHub and portfolio stay blank until you replace INSERT_ values in index.html.</p>
+      </section>
+    </main>
 
-    <section id="contact">
-      <div class="wrap">
-        <div class="section-head scroll-reveal">
-          <h2>Let's Connect</h2>
-          <p>I'm always interested in learning, collaborating, and creating new things through code.</p>
-        </div>
-        <div class="contact-grid">
-          <article class="contact-panel scroll-reveal">
-            <p>You can email me at guest67483@gmail.com. GitHub and Facebook are still placeholders — edit those <code>data-url</code> values when you have the real links.</p>
-            <p class="hint">No contact details were invented. Empty placeholders will not open a fake page.</p>
-          </article>
-          <div class="contact-actions scroll-reveal">
-            <a class="btn btn-primary" href="mailto:guest67483@gmail.com">Email · guest67483@gmail.com</a>
-            <a class="btn btn-ghost" href="#" data-url="INSERT_GITHUB_PROFILE_URL">GitHub</a>
-            <a class="btn btn-ghost" href="#" data-url="INSERT_FACEBOOK_PROFILE_URL">Facebook</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>Designed & Developed by Ron Matthew Ferreras · <span id="year"></span></p>
-  </footer>
-  <button class="top-btn" id="topBtn" type="button" aria-label="Back to top">↑</button>
+    <footer>Designed & Developed by Ron Matthew Ferreras · <span id="year"></span></footer>
+  </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    const nav = document.getElementById("nav");
-    const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.getElementById("navLinks");
-    const links = navLinks.querySelectorAll("a");
-    const topBtn = document.getElementById("topBtn");
-
-    menuBtn.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", String(open));
-      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    });
-
-    links.forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuBtn.setAttribute("aria-expanded", "false");
-        menuBtn.setAttribute("aria-label", "Open menu");
-      });
-    });
 
     document.querySelectorAll("[data-url]").forEach((link) => {
       link.addEventListener("click", (event) => {
         const value = link.dataset.url || "";
         if (value.startsWith("INSERT_")) {
           event.preventDefault();
-          link.textContent = "Add your link in index.html";
+          link.textContent = "Add link in index.html";
           return;
         }
-        if (value.startsWith("mailto:") || value.startsWith("http")) {
+        if (value.startsWith("http")) {
           link.setAttribute("href", value);
-          if (value.startsWith("http")) {
-            link.setAttribute("target", "_blank");
-            link.setAttribute("rel", "noopener noreferrer");
-          }
+          link.setAttribute("target", "_blank");
+          link.setAttribute("rel", "noopener noreferrer");
         }
       });
-    });
-
-    const revealItems = document.querySelectorAll(".scroll-reveal");
-    const sections = document.querySelectorAll("main section[id]");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("visible");
-        if (entry.target.id) {
-          links.forEach((link) => {
-            link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
-          });
-        }
-      });
-    }, { threshold: 0.28 });
-
-    revealItems.forEach((item) => observer.observe(item));
-    sections.forEach((section) => observer.observe(section));
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.addEventListener("scroll", () => {
-      nav.classList.toggle("scrolled", window.scrollY > 8);
-      topBtn.classList.toggle("show", window.scrollY > 420);
-    });
-
-    topBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     });
   </script>
 </body>
