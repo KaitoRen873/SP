@@ -247,7 +247,6 @@
       -webkit-backdrop-filter: blur(14px);
               backdrop-filter: blur(14px);
     }
-    /* faint grid, fading out toward the bottom */
     .hero::after {
       content: "";
       position: absolute; inset: 0; z-index: 0;
@@ -734,8 +733,9 @@
       background: var(--soft);
       color: var(--text);
       font-weight: 700; cursor: pointer;
-      display: inline-flex; align-items: center;
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform 0.22s ease, background 0.22s ease,
+                  border-color 0.22s ease, box-shadow 0.22s ease;
     }
     .connect a:hover, .connect button:hover { transform: translateY(-2px); border-color: var(--line-strong); }
     .connect a.primary {
@@ -743,6 +743,10 @@
       border-color: transparent; color: #fff;
     }
     .connect a.primary:hover { box-shadow: 0 12px 26px -12px var(--blue); }
+
+    /* resume download button */
+    .resume-btn .dl-icon { transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1); flex: none; }
+    .resume-btn:hover .dl-icon { transform: translateY(3px); }
 
     /* ---------- footer ---------- */
     footer {
@@ -942,9 +946,9 @@
           <!-- Profile -->
           <div class="pcard pcard--profile" style="--d:.20s">
             <div class="avatar" tabindex="0">
-              <img src="assets/profile 1.jpg" alt="Portrait of Ron Matthew Ferreras"
+              <img src="assets/profile 1.png" alt="Portrait of Ron Matthew Ferreras"
                    onerror="this.parentElement.classList.add('missing')">
-              <img class="alt" src="assets/profile 2.jpg" alt=""
+              <img class="alt" src="assets/profile 2.png" alt=""
                    onerror="this.style.display='none'">
               <span class="avatar-dot" aria-hidden="true"></span>
             </div>
@@ -1152,19 +1156,19 @@
                  - URL: replace "https://REPLACE-WITH-URL/" with the live link. -->
             <article class="project">
               <div class="shot" data-fallback="Add assets/NEW-PROJECT.jpg">
-                <img src="assets/DemoPortal.jpg"
+                <img src="assets/NEW-PROJECT.jpg"
                      alt="Preview of the NEW PROJECT NAME website"
                      onerror="this.parentElement.classList.add('missing')">
               </div>
               <div class="body">
                 <p class="badge working"><span class="bdot" aria-hidden="true"></span>Working</p>
-                <p class="kicker">Website Template</p>
-                <h4>Demo Website</h4>
-                <p>A Website that has features such as log in and request system. it also has a file uploader system that could be used for something.</p>
+                <p class="kicker">REPLACE — e.g. Web project</p>
+                <h4>NEW PROJECT NAME</h4>
+                <p>REPLACE — one or two sentences describing what the project does.</p>
                 <div class="tags">
                   <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
                 </div>
-                <a class="link" href="https://kaitoren873.github.io/Demo/" target="_blank" rel="noopener noreferrer">Live Project</a>
+                <a class="link" href="https://REPLACE-WITH-URL/" target="_blank" rel="noopener noreferrer">Live Project</a>
               </div>
             </article>
 
@@ -1204,7 +1208,21 @@
         <div class="connect">
           <a class="primary" href="mailto:guest67483@gmail.com">Email</a>
           <a href="#" data-url="https://github.com/KaitoRen873">GitHub</a>
-          <a href="#" data-url="INSERT_PORTFOLIO_URL">Portfolio</a>
+
+          <!-- Resume download — put your PDF at assets/Ron-Matthew-Ferreras-Resume.pdf -->
+          <a class="primary resume-btn"
+             href="assets/Ron-Matthew-Ferreras-Resume.pdf"
+             download="Ron-Matthew-Ferreras-Resume.pdf"
+             type="application/pdf">
+            <svg class="dl-icon" viewBox="0 0 24 24" width="15" height="15"
+                 fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v12"/>
+              <path d="m7 11 5 5 5-5"/>
+              <path d="M4 20h16"/>
+            </svg>
+            Download Resume
+          </a>
         </div>
       </section>
 
@@ -1328,7 +1346,7 @@
     }
 
     /* =========================================================
-       5 · EXTERNAL LINK HANDLING (GitHub / Portfolio)
+       5 · EXTERNAL LINK HANDLING (GitHub only now)
        ========================================================= */
     Array.prototype.forEach.call(document.querySelectorAll("[data-url]"), function (link) {
       link.addEventListener("click", function (event) {
